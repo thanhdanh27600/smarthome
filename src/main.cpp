@@ -10,8 +10,8 @@
 
 #define led 2
 
-const char index_html[] PROGMEM = {"<!DOCTYPE html>\n<html>\n<head>\n\t<script src=\"js/jquery.min.js\"></script>\n\t<script src=\"https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js\"></script>\n</head>\n<body>\n\n<img id=\"myImage\" onclick=\"changeOutput()\" src=\"pic_bulboff.gif\" width=\"100\" height=\"180\">\n\n<p>Click the light bulb to turn on/off the light.</p>\n\n</body>\n</html>\n"};
-
+const char index_html[] PROGMEM = {"<!DOCTYPE html>\n<html>\n<head>\n\t<script src=\"https://combinatronics.com/thanhdanh27600/smarthome/main/src/jquery.min.js\"></script>\n\t<script src=\"https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js\"></script>\n</head>\n<body>\n\n<img id=\"myImage\" onclick=\"changeOutput()\" src=\"https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulboff.gif?raw=true\" width=\"100\" height=\"180\">\n\n<p>Click the light bulb to turn on/off the light.</p>\n\n</body>\n</html>\n"};
+//<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 const char *ssid = STASSID;
 const char *password = STAPSK;
 
