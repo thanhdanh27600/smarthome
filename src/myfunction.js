@@ -40,9 +40,9 @@ function changeOutput(pinToToggle) {
                 dataType: "text",
                 success: function(response) {
                     if (response == '0') {
-                        $("#myImage").attr("src", "pic_bulboff.gif");
+                        $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulboff.gif?raw=true");
                     } else if (response == '1') {
-                       $("#myImage").attr("src", "pic_bulbon.gif");
+                       $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulbon.gif?raw=true");
                     }
                 },
                 timeout: 2000
