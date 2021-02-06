@@ -93,7 +93,8 @@ void setup(void)
   // server.on("/pic_bulboff.gif", handleBulbOff);
   // server.on("/js/jquery.min.js", handlejQuery);
   // server.on("/js/myJsFunctions.js", handleMyfuntions);
-  server.on("/digital_output/toggle", handleRelay);
+  //server.on("/digital_output/toggle", handleRelay);
+  server.on("/switch1", handleRelay);
 
   server.onNotFound(handleNotFound);
 

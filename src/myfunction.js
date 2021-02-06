@@ -47,4 +47,22 @@ function changeOutput(pinToToggle) {
                 },
                 timeout: 2000
             })
+}
+function checkbox() { 
+    var url_switch1 = "/switch1";
+    $.ajax({
+        url: url_switch1,
+        dataType: "text",
+        error: function() {
+            alert("Error! Check your connection and try again.");
+         },
+        success: function (response) {
+            if (response = '0') {
+                alert("state 0");
+            } else if (response = '1') { 
+                alert("state 1");
+                }
+            }
         }
+    )
+}
