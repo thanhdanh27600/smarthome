@@ -57,11 +57,7 @@ function checkbox() {
             alert("Error! Check your connection and try again.");
          },
         success: function (response) {
-            if (response == '0') {
-                alert("state 0");
-            } else if (response == '1') { 
-                alert("state 1");
-                }
+                alert("Response: state " + response);
             }
         }
     )

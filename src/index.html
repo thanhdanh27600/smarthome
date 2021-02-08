@@ -72,7 +72,7 @@
             </div>
             <div style="padding: 1em 0em 0em 1em"> </div><span> Toggle </span>
             <label class="switch">
-                <input type="checkbox" id="switch1" onclick="checkbox()">
+                <input type="checkbox" id="switch1" onclick="checkbox()" checked>
                 <span class="slider round"></span>
             </label>
         </div>
@@ -81,7 +81,7 @@
         <div id="link1">
             <h2>W3.CSS is Free</h2>
             <p>W3.CSS is free to use. No license is necessary.</p>
-
+            <button id="button" onclick="dht()"> DHT </button>
             <hr>
             <h2>Easy to Use</h2>
             <div class="w3-container w3-sand w3-leftbar">
@@ -121,6 +121,70 @@
             document.getElementById("home").classList.remove('d-none','d-block');
             document.getElementById("link1").classList.remove('d-none','d-block');
         }
+
+        /* Function send to Node MCU */
+        function init(){
+            var url_switch1 = "/checkstatus";
+            $.ajax({
+                url: url_switch1,
+                dataType: "text",
+                error: function() {
+                alert("Error! Check your connection and try again.");
+            },
+                success: function (response) {
+                if (response == '0') {
+                 document.getElementById("switch1").removeAttribute("checked");
+                    }
+            }
+            })
+        }
+        function dht() {
+             // for check dht
+             url_dht = "/dht";
+             $.ajax({
+                url: url_dht,
+                dataType: "text",
+                error: function() {
+                alert("Error! Check your connection and try again.");
+            },
+                success: function () {
+                 alert("DHT Read!!");
+                }
+            })
+        }
+        function turnOnLightSensor(){
+            url = "/turnonlightsensor";
+             $.ajax({
+                url: this.url,
+                dataType: "text",
+                error: function() {
+                alert("Error! Check your connection and try again.");
+            },
+                success: function (response) {
+                    if(response == "sucessfully"){
+                    alert("Turn on light sensor sucessfully");
+                    } 
+                }
+            })
+        }
+        function turnOffLightSensor(){
+            url = "/turnofflightsensor";
+             $.ajax({
+                url: this.url,
+                dataType: "text",
+                error: function() {
+                alert("Error! Check your connection and try again.");
+            },
+                success: function (response) {
+                    if(response == "sucessfully"){
+                    alert("Turn off light sensor sucessfully");
+                    } 
+                }
+            })
+        }
+
+
+        init();
     </script>
 
 </body>
