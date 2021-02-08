@@ -48,7 +48,7 @@ function changeOutput(pinToToggle) {
                 timeout: 2000
             })
 }
-function checkbox() { 
+function relay() { 
     var url_switch1 = "/switch1";
     $.ajax({
         url: url_switch1,

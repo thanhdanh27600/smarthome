@@ -72,7 +72,7 @@
             </div>
             <div style="padding: 1em 0em 0em 1em"> </div><span> Toggle </span>
             <label class="switch">
-                <input type="checkbox" id="switch1" onclick="checkbox()" checked>
+                <input type="checkbox" id="switch1" onclick="relay()" checked>
                 <span class="slider round"></span>
             </label>
         </div>
@@ -95,7 +95,13 @@
             <p>We have created some responsive W3CSS templates for you to use.</p>
             <p>You are free to modify, save, share, use or do whatever you want with them</p>
         </div>
-
+        
+        <div>
+            <label class="switch">
+                <input type="checkbox" id="motion-sensor" onclick="toggleMotionSensor()" checked>
+                <span class="slider round"></span>
+            </label>
+        </div>
     </div>
 
     <footer class="w3-container w3-theme" style="padding:32px">
@@ -152,8 +158,8 @@
                 }
             })
         }
-        function turnOnLightSensor(){
-            url = "/turnonlightsensor";
+        function toggleMotionSensor(){
+            url = "/motionsensor?toggle=true";
              $.ajax({
                 url: this.url,
                 dataType: "text",
@@ -161,29 +167,10 @@
                 alert("Error! Check your connection and try again.");
             },
                 success: function (response) {
-                    if(response == "sucessfully"){
-                    alert("Turn on light sensor sucessfully");
-                    } 
+                    alert("Toggle sucessfully, State " + response);
                 }
             })
         }
-        function turnOffLightSensor(){
-            url = "/turnofflightsensor";
-             $.ajax({
-                url: this.url,
-                dataType: "text",
-                error: function() {
-                alert("Error! Check your connection and try again.");
-            },
-                success: function (response) {
-                    if(response == "sucessfully"){
-                    alert("Turn off light sensor sucessfully");
-                    } 
-                }
-            })
-        }
-
-
         init();
     </script>
 
