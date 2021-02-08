@@ -189,7 +189,7 @@ void setup(void)
   // server.on("/js/jquery.min.js", handlejQuery);
   // server.on("/js/myJsFunctions.js", handleMyfuntions);
   //server.on("/digital_output/toggle", handleRelay);
-  server.on("/switch1", handleRelay);
+  server.on("/relay", handleRelay);
   server.on("/checkstatus", handleCheckStatus);
   server.on("/dht", handleDHT);
   server.on("/motionsensor", handleMotionsensor);

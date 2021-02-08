@@ -48,16 +48,16 @@ function changeOutput(pinToToggle) {
                 timeout: 2000
             })
 }
-function relay() { 
-    var url_switch1 = "/switch1";
+function relay(relay_num) {
+    var url_relay = "/relay?toggle=" + relay_num;
     $.ajax({
-        url: url_switch1,
+        url: url_relay,
         dataType: "text",
         error: function() {
             alert("Error! Check your connection and try again.");
          },
         success: function (response) {
-                alert("Response: state " + response);
+                alert("At relay " + relay_num +". Response: state " + response);
             }
         }
     )
