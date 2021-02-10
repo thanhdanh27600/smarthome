@@ -91,14 +91,14 @@
             <hr>
             <h2 id="heading_option2" style="padding-bottom: 0.5em;"></h2>
             <div class="d-flex">
-                <span style="font-size: 80px; padding-left: 1em;">25</span>
+                <span style="font-size: 80px; padding-left: 0.9em;">25</span>
                 <div style="margin: auto 0em 0em 0em ;">
                     <i class="wi wi-celsius" style="font-size: 100px;"></i>
                 </div>
             </div>
             <span>
                 <i class="wi wi-thermometer" style="font-size: x-large;"></i>
-                <span style="font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;"> : 22°C</span>
+                <span style="font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;"> : 22&#8451</span>
             </span>
             <span>
                 <i class="wi wi-raindrops" style="font-size: xx-large;"></i>
@@ -192,8 +192,8 @@
                 error: function () {
                     alert("Error! Check your connection and try again.");
                 },
-                success: function () {
-                    alert("DHT Read!!");
+                success: function (response) {
+                    alert(response);
                 }
             })
         }

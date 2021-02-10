@@ -135,3 +135,12 @@ function reset() {
             document.getElementById("general_setting").classList.remove('d-none', 'd-block');
             document.getElementById("myIntro").innerText = "";
 }
+function handleLanguage() {
+    if(document.getElementById("change_language").getAttribute("value") == "vie"){
+        document.getElementById("change_language").setAttribute("value","eng");
+        updateTextENG();
+    }else{
+        document.getElementById("change_language").setAttribute("value","vie");
+        updateTextVIE();
+    }          
+}
