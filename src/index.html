@@ -54,8 +54,7 @@
 
         <div id="general_control" class="w3-container" style="padding:32px;">
             <hr>
-            <h2>General Control Panel</h2>
-            <p>Dieu khien chung.</p>
+            <h2 id="heading_option1"></h2>
             <p style="padding-top: 1em;">
                 <label class="switch">
                     <input type="checkbox" id="switch1" onclick="relay(1)">
@@ -88,21 +87,19 @@
         </div>
         <div id="dht_22"  style="padding:32px;">
             <hr>
-            <h2>DHT 22 Control Panel</h2>
-            <p>Do nhiet do va do am.</p>
+            <h2 id="heading_option2"></h2>
             <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
             <hr>
         </div>
         <div id="general_setting" style="padding:32px;">
             <hr>
-            <h2>Setting</h2>
-            <p>We have created some responsive W3CSS templates for you to use.</p>
+            <h2 id="heading_option3"></h2>
             <p>
                 <label class="switch">
                     <input type="checkbox" onclick="toggleMotionSensor()">
                     <span class="slider round"></span>
                 </label>
-            <span id="motion_sensor" style="padding-left: 0.5em;">Motion Sensor </span>
+            <span id="motion_sensor" style="padding-left: 0.5em;"></span>
             </p>
             
             <p>
@@ -110,14 +107,14 @@
                     <input type="checkbox" onclick="toggleAlarmStatus()">
                     <span class="slider round"></span>
                 </label>
-            <span id="alarm_status" style="padding-left: 0.5em;">Alarm Status </span>
+            <span id="alarm_status" style="padding-left: 0.5em;"></span>
             </p>
             <p>
                 <label class="switch">
-                    <input type="checkbox" value="vie" onclick="handleLanguage()">
+                    <input type="checkbox" onclick="handleLanguage()">
                     <span class="slider round"></span>
                 </label>
-            <span id="change_language" style="padding-left: 0.5em;"></span>
+            <span id="change_language" value="vie" style="padding-left: 0.5em;"></span>
             </p>
             <div>
                 <img src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png"
@@ -138,16 +135,18 @@
     <script>
         /* Function send to Node MCU */
         function handleLanguage() {
-            if(document.getElementById("change-language").getAttribute("value") == "vie"){
-                document.getElementById("change-language").setAttribute("value","eng");
+            if(document.getElementById("change_language").getAttribute("value") == "vie"){
+                document.getElementById("change_language").setAttribute("value","eng");
+                updateTextENG();
             }else{
-                document.getElementById("change-language").setAttribute("value","vie");
+                document.getElementById("change_language").setAttribute("value","vie");
+                updateTextVIE();
             }
             
         }
         function init(){
             option1();
-            updateTextENG();
+            updateTextVIE();
         }
         function update(){
             var url_switch1 = "/checkstatus";

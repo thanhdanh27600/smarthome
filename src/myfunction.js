@@ -74,7 +74,11 @@ function updateTextENG() {
     document.getElementById("camera").innerText = "Security Camera";
     document.getElementById("refresh_button").innerText = "Update";
     document.getElementById("change_language").innerText = "Change language";
-            
+    document.getElementById("motion_sensor").innerText = "Motion Sensor";          
+    document.getElementById("alarm_status").innerText = "Alarm Status";
+    document.getElementById("heading_option1").innerText = "General Control Panel";
+    document.getElementById("heading_option2").innerText = "DHT 22 Control Panel";
+    document.getElementById("heading_option3").innerText = "Setting";    
 }
 
 function updateTextVIE() {
@@ -88,6 +92,11 @@ function updateTextVIE() {
     document.getElementById("camera").innerText = "Security Camera";
     document.getElementById("refresh_button").innerText = "Cap nhat";
     document.getElementById("change_language").innerText = "Thay doi ngon ngu";
+    document.getElementById("motion_sensor").innerText = "Kich hoat chuyen dong";
+    document.getElementById("alarm_status").innerText = "Kich hoat chuong";
+    document.getElementById("heading_option1").innerText = "Quan ly dieu khien";
+    document.getElementById("heading_option2").innerText = "DHT22 Quan ly cam bien";
+    document.getElementById("heading_option3").innerText = "Cai dat";
             
 }
 
