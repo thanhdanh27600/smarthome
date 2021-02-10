@@ -48,14 +48,14 @@
             </p>
         </div>
 
-        <header class="w3-container w3-theme" style="padding:32px 32px">
+        <header class="w3-container w3-theme" style="padding:50px 0px 0px 32px">
             <h1 class="w3-xxxlarge">Smarthome</h1>
         </header>
 
         <div id="general_control" class="w3-container" style="padding:32px;">
             <hr>
             <h2>General Control Panel</h2>
-            <p>W3.CSS is free to use. No license is necessary.</p>
+            <p>Dieu khien chung.</p>
             <p style="padding-top: 1em;">
                 <label class="switch">
                     <input type="checkbox" id="switch1" onclick="relay(1)">
@@ -89,7 +89,7 @@
         <div id="dht_22"  style="padding:32px;">
             <hr>
             <h2>DHT 22 Control Panel</h2>
-            <p>W3.CSS is free to use. No license is necessary.</p>
+            <p>Do nhiet do va do am.</p>
             <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
             <hr>
         </div>
@@ -99,7 +99,7 @@
             <p>We have created some responsive W3CSS templates for you to use.</p>
             <p>
                 <label class="switch">
-                    <input type="checkbox" id="motion-sensor" onclick="toggleMotionSensor()">
+                    <input type="checkbox" onclick="toggleMotionSensor()">
                     <span class="slider round"></span>
                 </label>
             <span id="motion_sensor" style="padding-left: 0.5em;">Motion Sensor </span>
@@ -107,10 +107,17 @@
             
             <p>
                 <label class="switch">
-                    <input type="checkbox" id="alarm-status" onclick="toggleAlarmStatus()">
+                    <input type="checkbox" onclick="toggleAlarmStatus()">
                     <span class="slider round"></span>
                 </label>
             <span id="alarm_status" style="padding-left: 0.5em;">Alarm Status </span>
+            </p>
+            <p>
+                <label class="switch">
+                    <input type="checkbox" value="vie" onclick="handleLanguage()">
+                    <span class="slider round"></span>
+                </label>
+            <span id="change_language" style="padding-left: 0.5em;"></span>
             </p>
             <div>
                 <img src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png"
@@ -121,7 +128,7 @@
     </div>
 
     <footer class="w3-container w3-theme" style="padding:32px">
-        <p>Footer information goes here</p>
+        <p>Pham Thanh Danh, Spring 2021</p>
     </footer>
 
     </div>
@@ -130,9 +137,17 @@
     <script src="https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js"></script>
     <script>
         /* Function send to Node MCU */
+        function handleLanguage() {
+            if(document.getElementById("change-language").getAttribute("value") == "vie"){
+                document.getElementById("change-language").setAttribute("value","eng");
+            }else{
+                document.getElementById("change-language").setAttribute("value","vie");
+            }
+            
+        }
         function init(){
             option1();
-            updateText();
+            updateTextENG();
         }
         function update(){
             var url_switch1 = "/checkstatus";

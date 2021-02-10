@@ -63,17 +63,34 @@ function relay(relay_num) {
     )
 }
 
-function updateText() {
-            document.getElementById("option1").innerText = "General Control"
-            document.getElementById("option2").innerText = "Humidity & Temparature"
-            document.getElementById("option3").innerText = "Cai dat"
-            document.getElementById("relay1").innerText = "Relay 1"
-            document.getElementById("relay2").innerText = "Relay 2"
-            document.getElementById("relay3").innerText = "Den truoc cong"
-            document.getElementById("relay4").innerText = "Chuong"
-            document.getElementById("camera").innerText = "Security Camera"
-            document.getElementById("refresh_button").innerText = "Update"
-        }
+function updateTextENG() {
+    document.getElementById("option1").innerText = "General Control";
+    document.getElementById("option2").innerText = "Humidity & Temparature";
+    document.getElementById("option3").innerText = "Setting";
+    document.getElementById("relay1").innerText = "Relay 1";
+    document.getElementById("relay2").innerText = "Relay 2";
+    document.getElementById("relay3").innerText = "Front light";
+    document.getElementById("relay4").innerText = "Alarm";
+    document.getElementById("camera").innerText = "Security Camera";
+    document.getElementById("refresh_button").innerText = "Update";
+    document.getElementById("change_language").innerText = "Change language";
+            
+}
+
+function updateTextVIE() {
+    document.getElementById("option1").innerText = "Dieu khien chung";
+    document.getElementById("option2").innerText = "Nhiet do & Do am";
+    document.getElementById("option3").innerText = "Cai dat";
+    document.getElementById("relay1").innerText = "Relay 1";
+    document.getElementById("relay2").innerText = "Relay 2";
+    document.getElementById("relay3").innerText = "Den truoc cong";
+    document.getElementById("relay4").innerText = "Chuong";
+    document.getElementById("camera").innerText = "Security Camera";
+    document.getElementById("refresh_button").innerText = "Cap nhat";
+    document.getElementById("change_language").innerText = "Thay doi ngon ngu";
+            
+}
+
 
 
 function option1() {
@@ -82,24 +99,24 @@ function option1() {
             document.getElementById("general_control").classList.add('d-block');
             document.getElementById("dht_22").classList.add('d-none');
             document.getElementById("general_setting").classList.add('d-none');
-            document.getElementById("myIntro").innerText = "Điều khiển chung";
-        }
+            document.getElementById("myIntro").innerText = "General Control";
+}
 function option2() {
             reset();
             document.getElementById("option2").classList.add('w3-teal');
             document.getElementById("general_control").classList.add('d-none');
             document.getElementById("dht_22").classList.add('d-block');
             document.getElementById("general_setting").classList.add('d-none');
-            document.getElementById("myIntro").innerText = "Nhiệt độ & Độ ẩm";
-        }
+            document.getElementById("myIntro").innerText = "Humidity & Temparature";
+}
 function option3() {
             reset();
             document.getElementById("option3").classList.add('w3-teal');
             document.getElementById("general_control").classList.add('d-none');
             document.getElementById("dht_22").classList.add('d-none');
             document.getElementById("general_setting").classList.add('d-block');
-            document.getElementById("myIntro").innerText = "Cài đặt";
-        }
+            document.getElementById("myIntro").innerText = "Setting";
+}
 function reset() {
             document.getElementById("option1").classList.remove('w3-teal');
             document.getElementById("option2").classList.remove('w3-teal');
@@ -108,4 +125,4 @@ function reset() {
             document.getElementById("dht_22").classList.remove('d-none', 'd-block');
             document.getElementById("general_setting").classList.remove('d-none', 'd-block');
             document.getElementById("myIntro").innerText = "";
-        }
+}
