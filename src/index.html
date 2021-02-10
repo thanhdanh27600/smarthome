@@ -7,8 +7,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://combinatronics.com/thanhdanh27600/smarthome/main/src/mystyle.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
+
 <style>
     .d-none {
         display: none;
@@ -85,10 +87,28 @@
             </p>
             <hr>
         </div>
-        <div id="dht_22"  style="padding:32px;">
+        <div id="dht_22" style="padding:32px;">
             <hr>
-            <h2 id="heading_option2"></h2>
-            <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
+            <h2 id="heading_option2" style="padding-bottom: 0.5em;"></h2>
+            <div class="d-flex">
+                <span style="font-size: 80px; padding-left: 1em;">25</span>
+                <div style="margin: auto 0em 0em 0em ;">
+                    <i class="wi wi-celsius" style="font-size: 100px;"></i>
+                </div>
+            </div>
+            <span>
+                <i class="wi wi-thermometer" style="font-size: x-large;"></i>
+                <span style="font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;"> : 22°C</span>
+            </span>
+            <span>
+                <i class="wi wi-raindrops" style="font-size: xx-large;"></i>
+                <span style="font-size: large; font-weight: bold; padding: 2em 0em 0em 1em;"> : 75%</span>
+                </span>
+            
+                <div style="padding-top: 2em;" >
+                    <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
+                </div>
+            </div>
             <hr>
         </div>
         <div id="general_setting" style="padding:32px;">
