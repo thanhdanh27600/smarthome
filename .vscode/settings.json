@@ -1,5 +1,6 @@
 {
     "files.associations": {
         "cmath": "cpp"
-    }
+    },
+    "python.pythonPath": "E:\\soft\\Python3.7\\python.exe"
 }

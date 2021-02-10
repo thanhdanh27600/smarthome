@@ -31,10 +31,10 @@
                 src="https://www.w3schools.com/images/w3schools.png" style="width:80%;"></a>
         <a class="w3-bar-item w3-button w3-hide-large w3-large" href="javascript:void(0)" onclick="w3_close()">Close <i
                 class="fa fa-remove"></i></a>
-        <a id="option1" class="w3-bar-item w3-button w3-teal" href="javascript:void(0)" onclick="option1()">Điều khiển chung</a>
-        <a id="option2" class="w3-bar-item w3-button" href="javascript:void(0)" onclick="option2()">Nhiệt độ & Độ ẩm</a>
-        <a id="option3" class="w3-bar-item w3-button" href="javascript:void(0)" onclick="option3()">Cài đặt</a>
-        <a id="camera" class="w3-bar-item w3-button" href="http:\\thanhdanh2000.cameraddns.net">Liên kết Camera</a>
+        <a id="option1" class="w3-bar-item w3-button w3-teal" href="javascript:void(0)" onclick="option1()"></a>
+        <a id="option2" class="w3-bar-item w3-button" href="javascript:void(0)" onclick="option2()"></a>
+        <a id="option3" class="w3-bar-item w3-button" href="javascript:void(0)" onclick="option3()"></a>
+        <a id="camera" class="w3-bar-item w3-button" href="http:\\thanhdanh2000.cameraddns.net"></a>
     </nav>
 
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
@@ -49,69 +49,74 @@
         </div>
 
         <header class="w3-container w3-theme" style="padding:32px 32px">
-            <h1 class="w3-xxxlarge">Phương - Smarthome</h1>
+            <h1 class="w3-xxxlarge">Smarthome</h1>
         </header>
 
         <div id="general_control" class="w3-container" style="padding:32px;">
-            <div>
-                <img src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png"
-                    width: 50% height: 50% alt="My images">
-            </div>
-            <p style="padding-top: 5em;">
+            <hr>
+            <h2>General Control Panel</h2>
+            <p>W3.CSS is free to use. No license is necessary.</p>
+            <p style="padding-top: 1em;">
                 <label class="switch">
                     <input type="checkbox" id="switch1" onclick="relay(1)">
                     <span class="slider round"></span>
                 </label>
-                <span style="padding-left: 1em;"> Relay 1 </span>
+                <span id="relay1" style="padding: 0.5em;"></span>
             </p>
             <p>
                 <label class="switch">
                     <input type="checkbox" id="switch2" onclick="relay(2)">
                     <span class="slider round"></span>
                 </label>
-                <span style="padding-left: 1em;"> Relay 2 </span>
+                <span id="relay2" style="padding-left: 0.5em;"></span>
             </p>
             <p>
                 <label class="switch">
                     <input type="checkbox" id="switch3" onclick="relay(3)">
                     <span class="slider round"></span>
                 </label>
-                <span style="padding-left: 1em;"> Relay 3 : Đèn cổng </span>
+                <span id="relay3" style="padding-left: 0.5em;"></span>
             </p>
             <p>
                 <label class="switch">
                     <input type="checkbox" id="switch4" onclick="relay(4)">
                     <span class="slider round"></span>
                 </label>
-                <span style="padding-left: 1em;"> Relay 4 : Chuông </span>
+                <span id="relay4" style="padding-left: 0.5em;"></span>
             </p>
+            <hr>
         </div>
-        <hr>
-
         <div id="dht_22"  style="padding:32px;">
+            <hr>
             <h2>DHT 22 Control Panel</h2>
             <p>W3.CSS is free to use. No license is necessary.</p>
-            <button class="btn btn-info" id="button" onclick="dht()">Cập nhật</button>
+            <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
             <hr>
         </div>
         <div id="general_setting" style="padding:32px;">
+            <hr>
             <h2>Setting</h2>
             <p>We have created some responsive W3CSS templates for you to use.</p>
-            <div class="d-flex">
+            <p>
                 <label class="switch">
                     <input type="checkbox" id="motion-sensor" onclick="toggleMotionSensor()">
                     <span class="slider round"></span>
                 </label>
-            <div style="padding-left: 1em;">Motion Sensor </div>
-            </div>
+            <span id="motion_sensor" style="padding-left: 0.5em;">Motion Sensor </span>
+            </p>
             
-            <div class="d-flex">
+            <p class="d-flex">
                 <label class="switch">
                     <input type="checkbox" id="alarm-status" onclick="toggleAlarmStatus()">
                     <span class="slider round"></span>
                 </label>
-            <div style="padding-left: 1em;">Alarm Status </div>
+            <span id="alarm_status" style="padding-left: 0.5em;">Alarm Status </span>
+            </p>
+            <div>
+                <img src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png"
+                    width: 50% height: 50% alt="My images">
             </div>
+            <hr>
         </div>
     </div>
 
@@ -124,43 +129,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js"></script>
     <script>
-        function option1() {
-            reset();
-            document.getElementById("option1").classList.add('w3-teal');
-            document.getElementById("general_control").classList.add('d-block');
-            document.getElementById("dht_22").classList.add('d-none');
-            document.getElementById("general_setting").classList.add('d-none');
-            document.getElementById("myIntro").innerText = "Điều khiển chung";
-        }
-        function option2() {
-            reset();
-            document.getElementById("option2").classList.add('w3-teal');
-            document.getElementById("general_control").classList.add('d-none');
-            document.getElementById("dht_22").classList.add('d-block');
-            document.getElementById("general_setting").classList.add('d-none');
-            document.getElementById("myIntro").innerText = "Nhiệt độ & Độ ẩm";
-        }
-        function option3() {
-            reset();
-            document.getElementById("option3").classList.add('w3-teal');
-            document.getElementById("general_control").classList.add('d-none');
-            document.getElementById("dht_22").classList.add('d-none');
-            document.getElementById("general_setting").classList.add('d-block');
-            document.getElementById("myIntro").innerText = "Cài đặt";
-        }
-        function reset() {
-            document.getElementById("option1").classList.remove('w3-teal');
-            document.getElementById("option2").classList.remove('w3-teal');
-            document.getElementById("option3").classList.remove('w3-teal');
-            document.getElementById("general_control").classList.remove('d-none', 'd-block');
-            document.getElementById("dht_22").classList.remove('d-none', 'd-block');
-            document.getElementById("general_setting").classList.remove('d-none', 'd-block');
-            document.getElementById("myIntro").innerText = "";
+        /* Function send to Node MCU */
+        function updateText() {
+            document.getElementById("option1").innerText = "Điều khiển chung"
+            document.getElementById("option2").innerText = "Nhiệt độ & Độ ẩm"
+            document.getElementById("option3").innerText = "Cài đặt"
+            document.getElementById("relay1").innerText = "Relay 1"
+            document.getElementById("relay2").innerText = "Relay 2"
+            document.getElementById("relay3").innerText = "Đèn cổng"
+            document.getElementById("relay4").innerText = "Chuông"
+            document.getElementById("camera").innerText = "Liên kết Camera"
+            document.getElementById("refresh_button").innerText = "Cập nhật"
+            
         }
 
-        /* Function send to Node MCU */
         function init(){
             option1();
+            updateText();
         }
         function update(){
             var url_switch1 = "/checkstatus";

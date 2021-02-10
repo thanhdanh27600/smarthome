@@ -63,6 +63,20 @@ function relay(relay_num) {
     )
 }
 
+function updateText() {
+            document.getElementById("option1").innerText = "Điều khiển chung"
+            document.getElementById("option2").innerText = "Nhiệt độ & Độ ẩm"
+            document.getElementById("option3").innerText = "Cài đặt"
+            document.getElementById("relay1").innerText = "Relay 1"
+            document.getElementById("relay2").innerText = "Relay 2"
+            document.getElementById("relay3").innerText = "Đèn cổng"
+            document.getElementById("relay4").innerText = "Chuông"
+            document.getElementById("camera").innerText = "Liên kết Camera"
+            document.getElementById("refresh_button").innerText = "Cập nhật"
+            
+        }
+
+
 function option1() {
             reset();
             document.getElementById("option1").classList.add('w3-teal');
