@@ -87,14 +87,14 @@ function updateTextVIE() {
     document.getElementById("option3").innerText = "Cai dat";
     document.getElementById("relay1").innerText = "Relay 1";
     document.getElementById("relay2").innerText = "Relay 2";
-    document.getElementById("relay3").innerText = "Den truoc cong";
+    document.getElementById("relay3").innerText = "Den cong truoc";
     document.getElementById("relay4").innerText = "Chuong";
     document.getElementById("camera").innerText = "Security Camera";
     document.getElementById("refresh_button").innerText = "Cap nhat";
     document.getElementById("change_language").innerText = "Thay doi ngon ngu";
     document.getElementById("motion_sensor").innerText = "Kich hoat chuyen dong";
-    document.getElementById("alarm_status").innerText = "Kich hoat chuong";
-    document.getElementById("heading_option1").innerText = "Quan ly dieu khien";
+    document.getElementById("alarm_status").innerText = "Kich hoat chuong bao";
+    document.getElementById("heading_option1").innerText = "Dieu khien cong tac";
     document.getElementById("heading_option2").innerText = "DHT22 Quan ly cam bien";
     document.getElementById("heading_option3").innerText = "Cai dat";
             
