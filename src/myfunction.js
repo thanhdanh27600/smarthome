@@ -73,7 +73,7 @@ function dht() {
             alert("Error! Check your connection and try again.");
         },
         success: function (response) {
-            if (failed == "failed") {
+            if (response == "failed") {
                 alert("Cannot read from DHT22");
                 return;
             }
