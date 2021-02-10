@@ -80,8 +80,8 @@ function dht() {
             else { 
                 var obj = JSON.parse(response);
                 document.getElementById("real_temp").innerText = obj.hic;
-                document.getElementById("temparature").innerText = " : " + obj.temp + '&#8451';
-                document.getElementById("relative_humid").innerText = " : " + obj.hic +"%";
+                document.getElementById("temparature").innerText = " : " + obj.temp;
+                document.getElementById("relative_humid").innerText = " : " + obj.humid +"%";
             }
         }
     })
