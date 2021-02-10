@@ -80,7 +80,7 @@ function dht() {
             else { 
                 var obj = JSON.parse(response);
                 document.getElementById("real_temp").innerText = obj.hic;
-                document.getElementById("temparature").innerText = " : " + obj.temp + 'Degree Celsisus';
+                document.getElementById("temparature").innerText = " : " + obj.temp + 'Degree Celsisus &#176;';
                 document.getElementById("relative_humid").innerText = " : " + obj.humid +"%";
             }
         }
