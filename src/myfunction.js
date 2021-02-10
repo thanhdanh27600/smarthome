@@ -42,7 +42,7 @@ function changeOutput(pinToToggle) {
                     if (response == '0') {
                         $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulboff.gif?raw=true");
                     } else if (response == '1') {
-                       $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulbon.gif?raw=true");
+                        $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulbon.gif?raw=true");
                     }
                 },
                 timeout: 2000
@@ -55,10 +55,44 @@ function relay(relay_num) {
         dataType: "text",
         error: function() {
             alert("Error! Check your connection and try again.");
-         },
+        },
         success: function (response) {
                 alert("At relay " + relay_num +". Response: state " + response);
             }
         }
     )
 }
+
+function option1() {
+            reset();
+            document.getElementById("option1").classList.add('w3-teal');
+            document.getElementById("general_control").classList.add('d-block');
+            document.getElementById("dht_22").classList.add('d-none');
+            document.getElementById("general_setting").classList.add('d-none');
+            document.getElementById("myIntro").innerText = "Điều khiển chung";
+        }
+function option2() {
+            reset();
+            document.getElementById("option2").classList.add('w3-teal');
+            document.getElementById("general_control").classList.add('d-none');
+            document.getElementById("dht_22").classList.add('d-block');
+            document.getElementById("general_setting").classList.add('d-none');
+            document.getElementById("myIntro").innerText = "Nhiệt độ & Độ ẩm";
+        }
+function option3() {
+            reset();
+            document.getElementById("option3").classList.add('w3-teal');
+            document.getElementById("general_control").classList.add('d-none');
+            document.getElementById("dht_22").classList.add('d-none');
+            document.getElementById("general_setting").classList.add('d-block');
+            document.getElementById("myIntro").innerText = "Cài đặt";
+        }
+function reset() {
+            document.getElementById("option1").classList.remove('w3-teal');
+            document.getElementById("option2").classList.remove('w3-teal');
+            document.getElementById("option3").classList.remove('w3-teal');
+            document.getElementById("general_control").classList.remove('d-none', 'd-block');
+            document.getElementById("dht_22").classList.remove('d-none', 'd-block');
+            document.getElementById("general_setting").classList.remove('d-none', 'd-block');
+            document.getElementById("myIntro").innerText = "";
+        }

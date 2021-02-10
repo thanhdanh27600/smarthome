@@ -1,18 +1,25 @@
 <!DOCTYPE html>
 <html>
-<title>W3.CSS</title>
+<title>SmartHome - Control Center</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-teal.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://combinatronics.com/thanhdanh27600/smarthome/main/src/mystyle.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <style>
-    .d-none{
+    .d-none {
         display: none;
     }
-    .d-block{
+
+    .d-block {
         display: block;
+    }
+
+    .d-flex {
+        display: flex;
     }
 </style>
 
@@ -24,17 +31,10 @@
                 src="https://www.w3schools.com/images/w3schools.png" style="width:80%;"></a>
         <a class="w3-bar-item w3-button w3-hide-large w3-large" href="javascript:void(0)" onclick="w3_close()">Close <i
                 class="fa fa-remove"></i></a>
-        <a class="w3-bar-item w3-button w3-teal" href="javascript:void(0)" onclick="home()">Home</a>
-        <a class="w3-bar-item w3-button" href="javascript:void(0)" onclick="link1()">Link 1</a>
-        <div>
-            <a class="w3-bar-item w3-button" onclick="myAccordion('demo')" href="javascript:void(0)">Dropdown <i
-                    class="fa fa-caret-down"></i></a>
-            <div id="demo" class="w3-hide">
-                <a class="w3-bar-item w3-button" href="#">Link</a>
-                <a class="w3-bar-item w3-button" href="#">Link</a>
-                <a class="w3-bar-item w3-button" href="#">Link</a>
-            </div>
-        </div>
+        <a id="option1" class="w3-bar-item w3-button w3-teal" href="javascript:void(0)" onclick="option1()">Điều khiển chung</a>
+        <a id="option2" class="w3-bar-item w3-button" href="javascript:void(0)" onclick="option2()">Nhiệt độ & Độ ẩm</a>
+        <a id="option3" class="w3-bar-item w3-button" href="javascript:void(0)" onclick="option3()">Cài đặt</a>
+        <a id="camera" class="w3-bar-item w3-button" href="http:\\thanhdanh2000.cameraddns.net">Liên kết Camera</a>
     </nav>
 
     <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" id="myOverlay">
@@ -44,63 +44,74 @@
 
         <div id="myTop" class="w3-container w3-top w3-theme w3-large">
             <p><i class="fa fa-bars w3-button w3-teal w3-hide-large w3-xlarge" onclick="w3_open()"></i>
-                <span id="myIntro" class="w3-hide">W3.CSS: Introduction</span>
+                <span id="myIntro" class="w3-hide w3-xlarge" style="padding-top: 10px;"></span>
             </p>
         </div>
 
-        <header class="w3-container w3-theme" style="padding:64px 32px">
-            <h1 class="w3-xxxlarge">W3.CSS</h1>
+        <header class="w3-container w3-theme" style="padding:32px 32px">
+            <h1 class="w3-xxxlarge">Phương - Smarthome</h1>
         </header>
 
-        <div id="home" class="w3-container" style="padding:32px">
-
-            <h2>What is W3.CSS?</h2>
-
-            <p>W3.CSS is a modern CSS framework with built-in responsiveness:</p>
-
-            <ul class="w3-leftbar w3-theme-border" style="list-style:none">
-                <li>Smaller and faster than other CSS frameworks.</li>
-                <li>Easier to learn, and easier to use than other CSS frameworks.</li>
-                <li>Uses standard CSS only (No jQuery or JavaScript library).</li>
-                <li>Speeds up mobile HTML apps.</li>
-                <li>Provides CSS equality for all devices. PC, laptop, tablet, and mobile:</li>
-            </ul>
-            <br>
+        <div id="general_control" class="w3-container" style="padding:32px;">
             <div>
-                <img src="https://raw.githubusercontent.com/thanhdanh27600/STM32-Nucleo/main/lab5/F103RB.jpg" width: 50%
-                    height: 50% alt="My images">
+                <img src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png"
+                    width: 50% height: 50% alt="My images">
             </div>
-            <div style="padding: 1em 0em 0em 1em"> </div><span> Toggle </span>
-            <label class="switch">
-                <input type="checkbox" id="switch1" onclick="relay()" checked>
-                <span class="slider round"></span>
-            </label>
+            <p style="padding-top: 5em;">
+                <label class="switch">
+                    <input type="checkbox" id="switch1" onclick="relay(1)">
+                    <span class="slider round"></span>
+                </label>
+                <span style="padding-left: 1em;"> Relay 1 </span>
+            </p>
+            <p>
+                <label class="switch">
+                    <input type="checkbox" id="switch2" onclick="relay(2)">
+                    <span class="slider round"></span>
+                </label>
+                <span style="padding-left: 1em;"> Relay 2 </span>
+            </p>
+            <p>
+                <label class="switch">
+                    <input type="checkbox" id="switch3" onclick="relay(3)">
+                    <span class="slider round"></span>
+                </label>
+                <span style="padding-left: 1em;"> Relay 3 : Đèn cổng </span>
+            </p>
+            <p>
+                <label class="switch">
+                    <input type="checkbox" id="switch4" onclick="relay(4)">
+                    <span class="slider round"></span>
+                </label>
+                <span style="padding-left: 1em;"> Relay 4 : Chuông </span>
+            </p>
         </div>
         <hr>
-        
-        <div id="link1">
-            <h2>W3.CSS is Free</h2>
+
+        <div id="dht_22"  style="padding:32px;">
+            <h2>DHT 22 Control Panel</h2>
             <p>W3.CSS is free to use. No license is necessary.</p>
-            <button id="button" onclick="dht()"> DHT </button>
+            <button class="btn btn-info" id="button" onclick="dht()">Cập nhật</button>
             <hr>
-            <h2>Easy to Use</h2>
-            <div class="w3-container w3-sand w3-leftbar">
-                <p><i>Make it as simple as possible, but not simpler.</i><br>
-                    Albert Einstein</p>
-            </div>
-
-            <hr>
-            <h2>W3.CSS Web Site Templates</h2>
-
-            <p>We have created some responsive W3CSS templates for you to use.</p>
-            <p>You are free to modify, save, share, use or do whatever you want with them</p>
         </div>
-        
-        <div>
-            <label class="switch">
-                <input type="checkbox" id="motion-sensor" onclick="toggleMotionSensor()" checked>
-                <span class="slider round"></span>
-            </label>
+        <div id="general_setting" style="padding:32px;">
+            <h2>Setting</h2>
+            <p>We have created some responsive W3CSS templates for you to use.</p>
+            <div class="d-flex">
+                <label class="switch">
+                    <input type="checkbox" id="motion-sensor" onclick="toggleMotionSensor()">
+                    <span class="slider round"></span>
+                </label>
+            <div style="padding-left: 1em;">Motion Sensor </div>
+            </div>
+            
+            <div class="d-flex">
+                <label class="switch">
+                    <input type="checkbox" id="alarm-status" onclick="toggleAlarmStatus()">
+                    <span class="slider round"></span>
+                </label>
+            <div style="padding-left: 1em;">Alarm Status </div>
+            </div>
         </div>
     </div>
 
@@ -113,64 +124,100 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js"></script>
     <script>
-        function link1() {
+        function option1() {
             reset();
-            document.getElementById("home").classList.add('d-none');
-            document.getElementById("link1").classList.add('d-block');
+            document.getElementById("option1").classList.add('w3-teal');
+            document.getElementById("general_control").classList.add('d-block');
+            document.getElementById("dht_22").classList.add('d-none');
+            document.getElementById("general_setting").classList.add('d-none');
+            document.getElementById("myIntro").innerText = "Điều khiển chung";
         }
-        function home() {
+        function option2() {
             reset();
-            document.getElementById("home").classList.add('d-block');
-            document.getElementById("link1").classList.add('d-none');
+            document.getElementById("option2").classList.add('w3-teal');
+            document.getElementById("general_control").classList.add('d-none');
+            document.getElementById("dht_22").classList.add('d-block');
+            document.getElementById("general_setting").classList.add('d-none');
+            document.getElementById("myIntro").innerText = "Nhiệt độ & Độ ẩm";
+        }
+        function option3() {
+            reset();
+            document.getElementById("option3").classList.add('w3-teal');
+            document.getElementById("general_control").classList.add('d-none');
+            document.getElementById("dht_22").classList.add('d-none');
+            document.getElementById("general_setting").classList.add('d-block');
+            document.getElementById("myIntro").innerText = "Cài đặt";
         }
         function reset() {
-            document.getElementById("home").classList.remove('d-none','d-block');
-            document.getElementById("link1").classList.remove('d-none','d-block');
+            document.getElementById("option1").classList.remove('w3-teal');
+            document.getElementById("option2").classList.remove('w3-teal');
+            document.getElementById("option3").classList.remove('w3-teal');
+            document.getElementById("general_control").classList.remove('d-none', 'd-block');
+            document.getElementById("dht_22").classList.remove('d-none', 'd-block');
+            document.getElementById("general_setting").classList.remove('d-none', 'd-block');
+            document.getElementById("myIntro").innerText = "";
         }
 
         /* Function send to Node MCU */
         function init(){
+            option1();
+        }
+        function update(){
             var url_switch1 = "/checkstatus";
             $.ajax({
                 url: url_switch1,
                 dataType: "text",
-                error: function() {
-                alert("Error! Check your connection and try again.");
-            },
+                error: function () {
+                    alert("Error! Check your connection and try again.");
+                },
                 success: function (response) {
-                if (response == '0') {
-                 document.getElementById("switch1").removeAttribute("checked");
+                    if (response == '1') {
+                        document.getElementById("switch1").setAttribute("checked", "");
                     }
-            }
+                }
             })
         }
         function dht() {
-             // for check dht
-             url_dht = "/dht";
-             $.ajax({
+            // for check dht
+            url_dht = "/dht";
+            $.ajax({
                 url: url_dht,
                 dataType: "text",
-                error: function() {
-                alert("Error! Check your connection and try again.");
-            },
+                error: function () {
+                    alert("Error! Check your connection and try again.");
+                },
                 success: function () {
-                 alert("DHT Read!!");
+                    alert("DHT Read!!");
                 }
             })
         }
-        function toggleMotionSensor(){
+        function toggleMotionSensor() {
             url = "/motionsensor?toggle=true";
-             $.ajax({
+            $.ajax({
                 url: this.url,
                 dataType: "text",
-                error: function() {
-                alert("Error! Check your connection and try again.");
-            },
+                error: function () {
+                    alert("Error! Check your connection and try again.");
+                },
                 success: function (response) {
-                    alert("Toggle sucessfully, State " + response);
+                    alert("Toggle Motion Sensor sucessfully, State " + response);
                 }
             })
         }
+        function toggleAlarmStatus() {
+            url = "/alarmstatus?toggle=true";
+            $.ajax({
+                url: this.url,
+                dataType: "text",
+                error: function () {
+                    alert("Error! Check your connection and try again.");
+                },
+                success: function (response) {
+                    alert("Toggle Alarm status sucessfully, State " + response);
+                }
+            })
+        }
+        update();
         init();
     </script>
 
