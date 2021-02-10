@@ -66,14 +66,13 @@ function relay(relay_num) {
 function updateText() {
             document.getElementById("option1").innerText = "General Control"
             document.getElementById("option2").innerText = "Humidity & Temparature"
-            document.getElementById("option3").innerText = "Setting"
+            document.getElementById("option3").innerText = "Cai dat"
             document.getElementById("relay1").innerText = "Relay 1"
             document.getElementById("relay2").innerText = "Relay 2"
             document.getElementById("relay3").innerText = "Den truoc cong"
             document.getElementById("relay4").innerText = "Chuong"
             document.getElementById("camera").innerText = "Security Camera"
             document.getElementById("refresh_button").innerText = "Update"
-            
         }
 
 
