@@ -73,10 +73,16 @@ function dht() {
             alert("Error! Check your connection and try again.");
         },
         success: function (response) {
-            var obj = JSON.parse(response);
-            document.getElementById("real_temp").innerText =  " : " + obj.hic;
-            document.getElementById("temparature").innerText = " : " + obj.temp + "&#8451";
-            document.getElementById("relative_humid").innerText = " : " + obj.hic;
+            if (failed == "failed") {
+                alert("Cannot read from DHT22");
+                return;
+            }
+            else { 
+                var obj = JSON.parse(response);
+                document.getElementById("real_temp").innerText = obj.hic;
+                document.getElementById("temparature").innerText = " : " + obj.temp + "°";
+                document.getElementById("relative_humid").innerText = " : " + obj.hic +"%";
+            }
         }
     })
 }
