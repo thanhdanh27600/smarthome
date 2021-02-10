@@ -83,7 +83,7 @@ function dht() {
                 document.getElementById("temparature").innerText = ` : ${obj.temp}°`;
                 document.getElementById("relative_humid").innerText = " : " + obj.humid + "%";
                 var str = document.getElementById("temparature").innerText
-                document.getElementById("temparature").innerText = document.getElementById("temparature").innerText.substring(0,str.length-3) + str.charAt(str.length-2);
+                document.getElementById("temparature").innerText = document.getElementById("temparature").innerText.substring(0,str.length-2) + str.charAt(str.length-1);
             }
         }
     })
