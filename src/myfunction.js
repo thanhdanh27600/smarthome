@@ -81,7 +81,9 @@ function dht() {
                 var obj = JSON.parse(response);
                 document.getElementById("real_temp").innerText = obj.hic;
                 document.getElementById("temparature").innerText = ` : ${obj.temp}°`;
-                document.getElementById("relative_humid").innerText = " : " + obj.humid +"%";
+                document.getElementById("relative_humid").innerText = " : " + obj.humid + "%";
+                var str = document.getElementById("temparature").innerText
+                alert(str.charAt(str.length-1));
             }
         }
     })
