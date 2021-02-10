@@ -91,18 +91,18 @@
             <hr>
             <h2 id="heading_option2" style="padding-bottom: 0.5em;"></h2>
             <div class="d-flex">
-                <span style="font-size: 80px; padding-left: 0.9em;">25</span>
+                <span id="real_temp" style="font-size: 80px; padding-left: 0.9em;">25</span>
                 <div style="margin: auto 0em 0em 0em ;">
                     <i class="wi wi-celsius" style="font-size: 100px;"></i>
                 </div>
             </div>
             <span>
                 <i class="wi wi-thermometer" style="font-size: x-large;"></i>
-                <span style="font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;"> : 22&#8451</span>
+                <span id="temparature" style="font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;"> : 22</span>
             </span>
             <span>
                 <i class="wi wi-raindrops" style="font-size: xx-large;"></i>
-                <span style="font-size: large; font-weight: bold; padding: 2em 0em 0em 1em;"> : 75%</span>
+                <span id="relative_humid" style="font-size: large; font-weight: bold; padding: 2em 0em 0em 1em;"> : 75%</span>
                 </span>
             
                 <div style="padding-top: 2em;" >
@@ -154,16 +154,6 @@
     <script src="https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js"></script>
     <script>
         /* Function send to Node MCU */
-        function handleLanguage() {
-            if(document.getElementById("change_language").getAttribute("value") == "vie"){
-                document.getElementById("change_language").setAttribute("value","eng");
-                updateTextENG();
-            }else{
-                document.getElementById("change_language").setAttribute("value","vie");
-                updateTextVIE();
-            }
-            
-        }
         function init(){
             option1();
             updateTextVIE();
@@ -193,7 +183,10 @@
                     alert("Error! Check your connection and try again.");
                 },
                 success: function (response) {
-                    alert(response);
+                    var obj = JSON.parse(response);
+                    document.getElementById("real_temp").innerText =  " : " + obj.hic;
+                    document.getElementById("temparature").innerText = " : " + obj.temp + "&#8451";
+                    document.getElementById("relative_humid").innerText = " : " + obj.hic;
                 }
             })
         }

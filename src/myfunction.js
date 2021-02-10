@@ -63,6 +63,24 @@ function relay(relay_num) {
     )
 }
 
+function dht() {
+    // for check dht
+    url_dht = "/dht";
+    $.ajax({
+        url: url_dht,
+        dataType: "text",
+        error: function () {
+            alert("Error! Check your connection and try again.");
+        },
+        success: function (response) {
+            var obj = JSON.parse(response);
+            document.getElementById("real_temp").innerText =  " : " + obj.hic;
+            document.getElementById("temparature").innerText = " : " + obj.temp + "&#8451";
+            document.getElementById("relative_humid").innerText = " : " + obj.hic;
+        }
+    })
+}
+
 function updateTextENG() {
     document.getElementById("option1").innerText = "General Control";
     document.getElementById("option2").innerText = "Humidity & Temparature";
