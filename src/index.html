@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://combinatronics.com/thanhdanh27600/smarthome/main/src/mystyle.css">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
 
@@ -25,8 +25,7 @@
     }
 </style>
 
-<body>
-
+<body onload="startTime()">
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="#"><img
@@ -50,10 +49,9 @@
             </p>
         </div>
 
-        <header class="w3-container w3-theme" style="padding:50px 0px 0px 32px">
-            <h1 class="w3-xxxlarge">Smarthome</h1>
+        <header class="w3-container w3-theme" style="padding:50px 0px 0px 1em">
+            <h1 class="w3-xxxlarge">Smarthome <span style="float: right; margin-right: 1em;" id="clock"></span></h1>
         </header>
-
         <div id="general_control" class="w3-container" style="padding:32px;">
             <hr>
             <h2 id="heading_option1"></h2>
@@ -98,18 +96,20 @@
             </div>
             <span>
                 <i class="wi wi-thermometer" style="font-size: x-large;"></i>
-                <span id="temparature" style="font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;"> : Update</span>
+                <span id="temparature" style="font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;"> :
+                    Update</span>
             </span>
             <span>
                 <i class="wi wi-raindrops" style="font-size: xx-large;"></i>
-                <span id="relative_humid" style="font-size: large; font-weight: bold; padding: 2em 0em 0em 1em;"> : Update</span>
-                </span>
-            
-                <div style="padding-top: 2em;" >
-                    <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
-                </div>
+                <span id="relative_humid" style="font-size: large; font-weight: bold; padding: 2em 0em 0em 1em;"> :
+                    Update</span>
+            </span>
+
+            <div style="padding-top: 2em;">
+                <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
             </div>
-            <div id="general_setting" style="padding:32px;">
+        </div>
+        <div id="general_setting" style="padding:32px;">
             <hr>
             <h2 id="heading_option3"></h2>
             <p>
@@ -117,22 +117,22 @@
                     <input type="checkbox" onclick="toggleMotionSensor()">
                     <span class="slider round"></span>
                 </label>
-            <span id="motion_sensor" style="padding-left: 0.5em;"></span>
+                <span id="motion_sensor" style="padding-left: 0.5em;"></span>
             </p>
-            
+
             <p>
                 <label class="switch">
                     <input type="checkbox" onclick="toggleAlarmStatus()">
                     <span class="slider round"></span>
                 </label>
-            <span id="alarm_status" style="padding-left: 0.5em;"></span>
+                <span id="alarm_status" style="padding-left: 0.5em;"></span>
             </p>
             <p>
                 <label class="switch">
                     <input type="checkbox" onclick="handleLanguage()">
                     <span class="slider round"></span>
                 </label>
-            <span id="change_language" value="vie" style="padding-left: 0.5em;"></span>
+                <span id="change_language" value="vie" style="padding-left: 0.5em;"></span>
             </p>
             <div>
                 <img src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png"
@@ -152,11 +152,12 @@
     <script src="https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js"></script>
     <script>
         /* Function send to Node MCU */
-        function init(){
+        function init() {
             option1();
             updateTextVIE();
         }
-        function update(){
+
+        function update() {
             var url_switch1 = "/checkstatus";
             $.ajax({
                 url: url_switch1,
@@ -171,6 +172,7 @@
                 }
             })
         }
+
         function toggleMotionSensor() {
             url = "/motionsensor?toggle=true";
             $.ajax({
@@ -184,6 +186,7 @@
                 }
             })
         }
+
         function toggleAlarmStatus() {
             url = "/alarmstatus?toggle=true";
             $.ajax({

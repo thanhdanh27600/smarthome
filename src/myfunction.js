@@ -3,20 +3,24 @@ function w3_open() {
     document.getElementById("mySidebar").style.display = "block";
     document.getElementById("myOverlay").style.display = "block";
 }
+
 function w3_close() {
-document.getElementById("mySidebar").style.display = "none";
-document.getElementById("myOverlay").style.display = "none";
+    document.getElementById("mySidebar").style.display = "none";
+    document.getElementById("myOverlay").style.display = "none";
 }
 
 // Change style of top container on scroll
-window.onscroll = function () { myFunction() };
+window.onscroll = function () {
+    myFunction()
+};
+
 function myFunction() {
-if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
-    document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
-    document.getElementById("myIntro").classList.add("w3-show-inline-block");
-} else {
-    document.getElementById("myIntro").classList.remove("w3-show-inline-block");
-    document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
+    if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+        document.getElementById("myTop").classList.add("w3-card-4", "w3-animate-opacity");
+        document.getElementById("myIntro").classList.add("w3-show-inline-block");
+    } else {
+        document.getElementById("myIntro").classList.remove("w3-show-inline-block");
+        document.getElementById("myTop").classList.remove("w3-card-4", "w3-animate-opacity");
     }
 }
 
@@ -34,33 +38,33 @@ function myAccordion(id) {
 }
 
 function changeOutput(pinToToggle) {
-            var someUrl = "/digital_output/toggle";
-            $.ajax({
-                url: someUrl,
-                dataType: "text",
-                success: function(response) {
-                    if (response == '0') {
-                        $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulboff.gif?raw=true");
-                    } else if (response == '1') {
-                        $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulbon.gif?raw=true");
-                    }
-                },
-                timeout: 2000
-            })
+    var someUrl = "/digital_output/toggle";
+    $.ajax({
+        url: someUrl,
+        dataType: "text",
+        success: function (response) {
+            if (response == '0') {
+                $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulboff.gif?raw=true");
+            } else if (response == '1') {
+                $("#myImage").attr("src", "https://github.com/thanhdanh27600/smarthome/blob/main/bulb/pic_bulbon.gif?raw=true");
+            }
+        },
+        timeout: 2000
+    })
 }
+
 function relay(relay_num) {
     var url_relay = "/relay?toggle=" + relay_num;
     $.ajax({
         url: url_relay,
         dataType: "text",
-        error: function() {
+        error: function () {
             alert("Error! Check your connection and try again.");
         },
         success: function (response) {
-                alert("At relay " + relay_num +". Response: state " + response);
-            }
+            alert("At relay " + relay_num + ". Response: state " + response);
         }
-    )
+    })
 }
 
 function dht() {
@@ -76,14 +80,13 @@ function dht() {
             if (response == "failed") {
                 alert("Cannot read from DHT22");
                 return;
-            }
-            else { 
+            } else {
                 var obj = JSON.parse(response);
                 document.getElementById("real_temp").innerText = obj.hic;
                 document.getElementById("temparature").innerText = `${obj.temp}°`;
-                document.getElementById("relative_humid").innerText = + obj.humid + "%";
+                document.getElementById("relative_humid").innerText = +obj.humid + "%";
                 var str = document.getElementById("temparature").innerText
-                document.getElementById("temparature").innerText = document.getElementById("temparature").innerText.substring(0,str.length-2) + str.charAt(str.length-1);
+                document.getElementById("temparature").innerText = document.getElementById("temparature").innerText.substring(0, str.length - 2) + str.charAt(str.length - 1);
             }
         }
     })
@@ -100,11 +103,11 @@ function updateTextENG() {
     document.getElementById("camera").innerText = "Security Camera";
     document.getElementById("refresh_button").innerText = "Update";
     document.getElementById("change_language").innerText = "Change language";
-    document.getElementById("motion_sensor").innerText = "Motion Sensor";          
+    document.getElementById("motion_sensor").innerText = "Motion Sensor";
     document.getElementById("alarm_status").innerText = "Alarm Status";
     document.getElementById("heading_option1").innerText = "General Control Panel";
     document.getElementById("heading_option2").innerText = "DHT 22 Control Panel";
-    document.getElementById("heading_option3").innerText = "Setting";    
+    document.getElementById("heading_option3").innerText = "Setting";
 }
 
 function updateTextVIE() {
@@ -123,50 +126,66 @@ function updateTextVIE() {
     document.getElementById("heading_option1").innerText = "Dieu khien cong tac";
     document.getElementById("heading_option2").innerText = "DHT22 Quan ly cam bien";
     document.getElementById("heading_option3").innerText = "Cai dat";
-            
+
 }
 
 
 
 function option1() {
-            reset();
-            document.getElementById("option1").classList.add('w3-teal');
-            document.getElementById("general_control").classList.add('d-block');
-            document.getElementById("dht_22").classList.add('d-none');
-            document.getElementById("general_setting").classList.add('d-none');
-            document.getElementById("myIntro").innerText = "General Control";
+    reset();
+    document.getElementById("option1").classList.add('w3-teal');
+    document.getElementById("general_control").classList.add('d-block');
+    document.getElementById("dht_22").classList.add('d-none');
+    document.getElementById("general_setting").classList.add('d-none');
+    document.getElementById("myIntro").innerText = "General Control";
 }
+
 function option2() {
-            reset();
-            document.getElementById("option2").classList.add('w3-teal');
-            document.getElementById("general_control").classList.add('d-none');
-            document.getElementById("dht_22").classList.add('d-block');
-            document.getElementById("general_setting").classList.add('d-none');
-            document.getElementById("myIntro").innerText = "Humidity & Temparature";
+    reset();
+    document.getElementById("option2").classList.add('w3-teal');
+    document.getElementById("general_control").classList.add('d-none');
+    document.getElementById("dht_22").classList.add('d-block');
+    document.getElementById("general_setting").classList.add('d-none');
+    document.getElementById("myIntro").innerText = "Humidity & Temparature";
 }
+
 function option3() {
-            reset();
-            document.getElementById("option3").classList.add('w3-teal');
-            document.getElementById("general_control").classList.add('d-none');
-            document.getElementById("dht_22").classList.add('d-none');
-            document.getElementById("general_setting").classList.add('d-block');
-            document.getElementById("myIntro").innerText = "Setting";
+    reset();
+    document.getElementById("option3").classList.add('w3-teal');
+    document.getElementById("general_control").classList.add('d-none');
+    document.getElementById("dht_22").classList.add('d-none');
+    document.getElementById("general_setting").classList.add('d-block');
+    document.getElementById("myIntro").innerText = "Setting";
 }
+
 function reset() {
-            document.getElementById("option1").classList.remove('w3-teal');
-            document.getElementById("option2").classList.remove('w3-teal');
-            document.getElementById("option3").classList.remove('w3-teal');
-            document.getElementById("general_control").classList.remove('d-none', 'd-block');
-            document.getElementById("dht_22").classList.remove('d-none', 'd-block');
-            document.getElementById("general_setting").classList.remove('d-none', 'd-block');
-            document.getElementById("myIntro").innerText = "";
+    document.getElementById("option1").classList.remove('w3-teal');
+    document.getElementById("option2").classList.remove('w3-teal');
+    document.getElementById("option3").classList.remove('w3-teal');
+    document.getElementById("general_control").classList.remove('d-none', 'd-block');
+    document.getElementById("dht_22").classList.remove('d-none', 'd-block');
+    document.getElementById("general_setting").classList.remove('d-none', 'd-block');
+    document.getElementById("myIntro").innerText = "";
 }
+
 function handleLanguage() {
-    if(document.getElementById("change_language").getAttribute("value") == "vie"){
-        document.getElementById("change_language").setAttribute("value","eng");
+    if (document.getElementById("change_language").getAttribute("value") == "vie") {
+        document.getElementById("change_language").setAttribute("value", "eng");
         updateTextENG();
-    }else{
-        document.getElementById("change_language").setAttribute("value","vie");
+    } else {
+        document.getElementById("change_language").setAttribute("value", "vie");
         updateTextVIE();
-    }          
+    }
+}
+
+function startTime() {
+    var today = new Date();
+    var h = today.getHours();
+    var m = today.getMinutes();
+    var s = today.getSeconds();
+    m = checkTime(m);
+    s = checkTime(s);
+    document.getElementById('clock').innerHTML =
+        h + ":" + m + ":" + s;
+    var t = setTimeout(startTime, 500);
 }
