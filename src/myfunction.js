@@ -159,6 +159,7 @@ function option3() {
 }
 
 function reset() {
+    w3_close();
     document.getElementById("option1").classList.remove('w3-teal');
     document.getElementById("option2").classList.remove('w3-teal');
     document.getElementById("option3").classList.remove('w3-teal');
