@@ -175,6 +175,7 @@ function reset() {
     document.getElementById("option1").classList.remove('w3-teal');
     document.getElementById("option2").classList.remove('w3-teal');
     document.getElementById("option3").classList.remove('w3-teal');
+    document.getElementById("option4").classList.remove('w3-teal');
     document.getElementById("general_control").classList.remove('d-none', 'd-block');
     document.getElementById("dht_22").classList.remove('d-none', 'd-block');
     document.getElementById("general_setting").classList.remove('d-none', 'd-block');
