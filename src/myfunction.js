@@ -137,6 +137,7 @@ function option1() {
     document.getElementById("general_control").classList.add('d-block');
     document.getElementById("dht_22").classList.add('d-none');
     document.getElementById("general_setting").classList.add('d-none');
+    document.getElementById("security_camera").classList.add('d-none');
     document.getElementById("myIntro").innerText = "General Control";
 }
 
@@ -146,6 +147,7 @@ function option2() {
     document.getElementById("general_control").classList.add('d-none');
     document.getElementById("dht_22").classList.add('d-block');
     document.getElementById("general_setting").classList.add('d-none');
+    document.getElementById("security_camera").classList.add('d-none');
     document.getElementById("myIntro").innerText = "Humidity & Temparature";
 }
 
@@ -155,7 +157,17 @@ function option3() {
     document.getElementById("general_control").classList.add('d-none');
     document.getElementById("dht_22").classList.add('d-none');
     document.getElementById("general_setting").classList.add('d-block');
+    document.getElementById("security_camera").classList.add('d-none');
     document.getElementById("myIntro").innerText = "Setting";
+}
+
+function option4() {
+    document.getElementById("option4").classList.add('w3-teal');
+    document.getElementById("general_control").classList.add('d-none');
+    document.getElementById("dht_22").classList.add('d-none');
+    document.getElementById("general_setting").classList.add('d-none');
+    document.getElementById("security_camera").classList.add('d-block');
+    document.getElementById("myIntro").innerText = "Camera Control";
 }
 
 function reset() {
