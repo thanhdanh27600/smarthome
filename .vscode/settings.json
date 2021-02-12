@@ -11,7 +11,8 @@
         "array": "cpp",
         "memory": "cpp",
         "initializer_list": "cpp",
-        "algorithm": "cpp"
+        "algorithm": "cpp",
+        "sstream": "cpp"
     },
     "python.pythonPath": "E:\\soft\\Python3.7\\python.exe"
 }

@@ -57,7 +57,8 @@
         <header class="w3-container w3-theme" style="padding:50px 0px 0px 1em">
             <h1 class="w3-xxlarge">Smarthome <span style="float: right; margin-right: 0.5em; font-size: x-large; padding-top: 10px;" id="clock"></span></h1>
         </header>
-        <div id="general_control" class="w3-container" style="padding:32px;">
+        <div style="float: right;margin-right: 1em;font-style: italic;" id="last_update">Last update: </div>
+        <div id="general_control" class="w3-container" style="padding:0px 32px;">
             <hr>
             <h2 id="heading_option1"></h2>
             <p style="padding-top: 1em;">
@@ -156,7 +157,23 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js"></script>
     <script>
+
         /* Function send to Node MCU */
+        function refreshTime() {
+            var now = new Date();
+            url = "/refreshtime?hour="+now.getHours()+"&minute="+now.getMinutes();
+            $.ajax({
+                url: this.url,
+                dataType: "text",
+                error: function () {
+                    alert("Error! Check your connection and try again.");
+                },
+                success: function (response) {
+                    document.getElementById('last_update').innerText = "Last update: " + response;
+                }
+            })
+        }
+        
         function init() {
             option1();
             updateTextVIE();
@@ -169,6 +186,7 @@
                 dataType: "text",
                 error: function () {
                     alert("Error! Check your connection and try again.");
+                    return;
                 },
                 success: function (response) {
                     if (response == '1') {
@@ -176,6 +194,7 @@
                     }
                 }
             })
+            refreshTime();
         }
 
         function toggleMotionSensor() {
