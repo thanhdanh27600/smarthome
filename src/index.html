@@ -148,8 +148,8 @@
         </div>
         <div id="security_camera" style="padding:32px;">
             <hr>
-            <h2 id="heading_option4">OPTION4</h2>
-            <button class="btn btn-info" id="refresh_camera" onclick="refreshCamera()">CAMERA</button>
+            <h2 id="heading_option4">Camera</h2>
+            <button class="btn btn-info" id="refresh_camera" onclick="refreshCamera()">Refresh</button>
                 <img id="image_camera" src=""
                     style="width: 100%; height: auto;" alt="My images"> </img>
                 <div>
@@ -171,7 +171,7 @@
         /* Function send to Node MCU */
         function refreshCamera(){
             setTimeout(()=>{document.getElementById('iframe_camera').style.display="none",1000});
-            setInterval(() =>{document.getElementById('image_camera').src="http://thanhdanh2000.cameraddns.net/Streaming/channels/1/picture?" +  new Date().getTime();},2000);
+            setInterval(() =>{document.getElementById('image_camera').src="http://thanhdanh2000.cameraddns.net/Streaming/channels/1/picture?" +  new Date().getTime();},1000);
         }
         function refreshTime() {
             var now = new Date();

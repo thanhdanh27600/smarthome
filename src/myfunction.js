@@ -182,6 +182,7 @@ function reset() {
     document.getElementById("general_control").classList.remove('d-none', 'd-block');
     document.getElementById("dht_22").classList.remove('d-none', 'd-block');
     document.getElementById("general_setting").classList.remove('d-none', 'd-block');
+    document.getElementById("security_camera").classList.remove('d-none', 'd-block');
     document.getElementById("myIntro").innerText = "";
 }
 
