@@ -10,7 +10,8 @@
         "random": "cpp",
         "array": "cpp",
         "memory": "cpp",
-        "initializer_list": "cpp"
+        "initializer_list": "cpp",
+        "algorithm": "cpp"
     },
     "python.pythonPath": "E:\\soft\\Python3.7\\python.exe"
 }

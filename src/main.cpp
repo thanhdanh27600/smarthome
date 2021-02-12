@@ -19,12 +19,17 @@
 #define relay4 13
 #define light_pin A0
 #define motion_pin 4
-//trig: 0
-//echo 15
 
 #define light_second 10
 #define timeMotion 7000 //time for detect a motion
 #define timeAlarm 200 //time for detect a motion
+
+/* Software timer */
+extern "C"{
+#include "user_interface.h"
+}
+os_timer_t myTimer;
+boolean tickOccured = false;
 
 /* DHT 22 */
 DHT dht(DHTPIN, DHTTYPE);
@@ -33,41 +38,79 @@ float humid = 0.0;
 float hic = 0.0; // heat index
 
 /*Timer and variable for motion sensor*/
-unsigned long now = millis();
+unsigned long now = 0;
 unsigned long lastTrigger = 0;
 boolean startTimer = false;
 boolean motionStatus = true;
 boolean statusLight = true;
 unsigned long countMotion = 0;
 
+/* Variable for distance */
+#define trig_pin 0
+#define echo_pin 15
+#define THRESHOLD_DISTANCE 100
+unsigned long duration;    // variable for the duration of sound wave travel
+unsigned int distance = 0; // variable for the distance measurement
+unsigned int count_distance = 0;
 
 /* Timer and variable for alarm*/
 boolean statusAlarm = true;
 
-const char index_html[] PROGMEM = {"<!DOCTYPE html>\n<html>\n<title>SmartHome - Control Center</title>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/lib/w3-theme-teal.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto\">\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n<link rel=\"stylesheet\" href=\"https://combinatronics.com/thanhdanh27600/smarthome/main/src/mystyle.css\">\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\"\n    integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css\">\n\n<style>\n    .d-none {\n        display: none;\n    }\n\n    .d-block {\n        display: block;\n    }\n\n    .d-flex {\n        display: flex;\n    }\n</style>\n\n<body onload=\"startTime()\">\n    <nav class=\"w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card\" style=\"z-index:3;width:250px;\"\n        id=\"mySidebar\">\n        <a class=\"w3-bar-item w3-button w3-border-bottom w3-large\" href=\"#\"><img\n                src=\"https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/esp8266-nodemcu-wifi-module-500x500.jpg\" style=\"width:80%;\"></a>\n        <a class=\"w3-bar-item w3-button w3-hide-large w3-large\" href=\"javascript:void(0)\" onclick=\"w3_close()\">Close <i\n                class=\"fa fa-remove\"></i></a>\n        <a id=\"option1\" class=\"w3-bar-item w3-button w3-teal\" href=\"javascript:void(0)\" onclick=\"option1()\"></a>\n        <a id=\"option2\" class=\"w3-bar-item w3-button\" href=\"javascript:void(0)\" onclick=\"option2()\"></a>\n        <a id=\"option3\" class=\"w3-bar-item w3-button\" href=\"javascript:void(0)\" onclick=\"option3()\"></a>\n        <a id=\"camera\" class=\"w3-bar-item w3-button\" href=\"http:\\\\thanhdanh2000.cameraddns.net\"></a>\n    </nav>\n\n    <div class=\"w3-overlay w3-hide-large w3-animate-opacity\" onclick=\"w3_close()\" style=\"cursor:pointer\" id=\"myOverlay\">\n    </div>\n\n    <div class=\"w3-main\" style=\"margin-left:250px;\">\n\n        <div id=\"myTop\" class=\"w3-container w3-top w3-theme w3-large\">\n            <p><i class=\"fa fa-bars w3-button w3-teal w3-hide-large w3-xlarge\" onclick=\"w3_open()\"></i>\n                <span id=\"myIntro\" class=\"w3-hide w3-xlarge\" style=\"padding-top: 10px;\"></span>\n            </p>\n        </div>\n\n        <header class=\"w3-container w3-theme\" style=\"padding:50px 0px 0px 1em\">\n            <h1 class=\"w3-xxlarge\">Smarthome <span style=\"float: right; margin-right: 0.5em; font-size: x-large; padding-top: 10px;\" id=\"clock\"></span></h1>\n        </header>\n        <div id=\"general_control\" class=\"w3-container\" style=\"padding:32px;\">\n            <hr>\n            <h2 id=\"heading_option1\"></h2>\n            <p style=\"padding-top: 1em;\">\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch1\" onclick=\"relay(1)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay1\" style=\"padding: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch2\" onclick=\"relay(2)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay2\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch3\" onclick=\"relay(3)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay3\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch4\" onclick=\"relay(4)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay4\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <hr>\n        </div>\n        <div id=\"dht_22\" style=\"padding:32px;\">\n            <hr>\n            <h2 id=\"heading_option2\" style=\"padding-bottom: 0.5em;\"></h2>\n            <div class=\"d-flex\">\n                <span id=\"real_temp\" style=\"font-size: 80px; padding-left: 0.4em;\">Update</span>\n                <div style=\"margin: auto 0em 0em 0em ;\">\n                    <i class=\"wi wi-celsius\" style=\"font-size: 100px;\"></i>\n                </div>\n            </div>\n            <span>\n                <i class=\"wi wi-thermometer\" style=\"font-size: x-large;\"></i>\n                <span id=\"temparature\" style=\"font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;\"> :\n                    Update</span>\n            </span>\n            <span>\n                <i class=\"wi wi-raindrops\" style=\"font-size: xx-large;\"></i>\n                <span id=\"relative_humid\" style=\"font-size: large; font-weight: bold; padding: 2em 0em 0em 1em;\"> :\n                    Update</span>\n            </span>\n\n            <div style=\"padding-top: 2em;\">\n                <button class=\"btn btn-info\" id=\"refresh_button\" onclick=\"dht()\"></button>\n            </div>\n        </div>\n        <div id=\"general_setting\" style=\"padding:32px;\">\n            <hr>\n            <h2 id=\"heading_option3\"></h2>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" onclick=\"toggleMotionSensor()\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"motion_sensor\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" onclick=\"toggleAlarmStatus()\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"alarm_status\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" onclick=\"handleLanguage()\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"change_language\" value=\"vie\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <div>\n                <img src=\"https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png\"\n                    width: 100%; height: auto; alt=\"My images\">\n            </div>\n            <hr>\n        </div>\n    </div>\n\n    <footer class=\"w3-container w3-theme\" style=\"padding: 1em;position: absolute;bottom: 0;width: 100%;\">\n        <p style=\"margin-top: 5px; margin-bottom: 5px;\">Pham Thanh Danh, Spring 2021</p>\n    </footer>\n\n    </div>\n\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n    <script src=\"https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js\"></script>\n    <script>\n        /* Function send to Node MCU */\n        function init() {\n            option1();\n            updateTextVIE();\n        }\n\n        function update() {\n            var url_switch1 = \"/checkstatus\";\n            $.ajax({\n                url: url_switch1,\n                dataType: \"text\",\n                error: function () {\n                    alert(\"Error! Check your connection and try again.\");\n                },\n                success: function (response) {\n                    if (response == '1') {\n                        document.getElementById(\"switch1\").setAttribute(\"checked\", \"\");\n                    }\n                }\n            })\n        }\n\n        function toggleMotionSensor() {\n            url = \"/motionsensor?toggle=true\";\n            $.ajax({\n                url: this.url,\n                dataType: \"text\",\n                error: function () {\n                    alert(\"Error! Check your connection and try again.\");\n                },\n                success: function (response) {\n                    alert(\"Toggle Motion Sensor sucessfully, State \" + response);\n                }\n            })\n        }\n\n        function toggleAlarmStatus() {\n            url = \"/alarmstatus?toggle=true\";\n            $.ajax({\n                url: this.url,\n                dataType: \"text\",\n                error: function () {\n                    alert(\"Error! Check your connection and try again.\");\n                },\n                success: function (response) {\n                    alert(\"Toggle Alarm status sucessfully, State \" + response);\n                }\n            })\n        }\n        update();\n        init();\n    </script>\n\n</body>\n\n</html>"};
+const char index_html[] PROGMEM = {"<!DOCTYPE html>\n<html>\n<title>SmartHome - Control Center</title>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/w3css/4/w3.css\">\n<link rel=\"stylesheet\" href=\"https://www.w3schools.com/lib/w3-theme-teal.css\">\n<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css?family=Roboto\">\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css\">\n<link rel=\"stylesheet\" href=\"https://combinatronics.com/thanhdanh27600/smarthome/main/src/mystyle.css\">\n<link rel=\"stylesheet\" href=\"https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css\"\n    integrity=\"sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm\" crossorigin=\"anonymous\">\n<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css\">\n\n<style>\n    body{\n    position: relative;\n    height: 100vh;\n    }\n\n    .d-none {\n        display: none;\n    }\n\n    .d-block {\n        display: block;\n    }\n\n    .d-flex {\n        display: flex;\n    }\n</style>\n\n<body onload=\"startTime()\">\n    <nav class=\"w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card\" style=\"z-index:3;width:250px;\"\n        id=\"mySidebar\">\n        <a class=\"w3-bar-item w3-button w3-border-bottom w3-large\" href=\"#\"><img\n                src=\"https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/esp8266-nodemcu-wifi-module-500x500.jpg\" style=\"width:80%;\"></a>\n        <a class=\"w3-bar-item w3-button w3-hide-large w3-large\" href=\"javascript:void(0)\" onclick=\"w3_close()\">Close <i\n                class=\"fa fa-remove\"></i></a>\n        <a id=\"option1\" class=\"w3-bar-item w3-button w3-teal\" href=\"javascript:void(0)\" onclick=\"option1()\"></a>\n        <a id=\"option2\" class=\"w3-bar-item w3-button\" href=\"javascript:void(0)\" onclick=\"option2()\"></a>\n        <a id=\"option3\" class=\"w3-bar-item w3-button\" href=\"javascript:void(0)\" onclick=\"option3()\"></a>\n        <a id=\"camera\" class=\"w3-bar-item w3-button\" href=\"http:\\\\thanhdanh2000.cameraddns.net\"></a>\n    </nav>\n\n    <div class=\"w3-overlay w3-hide-large w3-animate-opacity\" onclick=\"w3_close()\" style=\"cursor:pointer\" id=\"myOverlay\">\n    </div>\n\n    <div class=\"w3-main\" style=\"margin-left:250px;\">\n\n        <div id=\"myTop\" class=\"w3-container w3-top w3-theme w3-large\">\n            <p><i class=\"fa fa-bars w3-button w3-teal w3-hide-large w3-xlarge\" onclick=\"w3_open()\"></i>\n                <span id=\"myIntro\" class=\"w3-hide w3-xlarge\" style=\"padding-top: 10px;\"></span>\n            </p>\n        </div>\n\n        <header class=\"w3-container w3-theme\" style=\"padding:50px 0px 0px 1em\">\n            <h1 class=\"w3-xxlarge\">Smarthome <span style=\"float: right; margin-right: 0.5em; font-size: x-large; padding-top: 10px;\" id=\"clock\"></span></h1>\n        </header>\n        <div id=\"general_control\" class=\"w3-container\" style=\"padding:32px;\">\n            <hr>\n            <h2 id=\"heading_option1\"></h2>\n            <p style=\"padding-top: 1em;\">\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch1\" onclick=\"relay(1)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay1\" style=\"padding: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch2\" onclick=\"relay(2)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay2\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch3\" onclick=\"relay(3)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay3\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" id=\"switch4\" onclick=\"relay(4)\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"relay4\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <hr>\n        </div>\n        <div id=\"dht_22\" style=\"padding:32px;\">\n            <hr>\n            <h2 id=\"heading_option2\" style=\"padding-bottom: 0.5em;\"></h2>\n            <div class=\"d-flex\">\n                <span id=\"real_temp\" style=\"font-size: 80px; padding-left: 0.4em;\">Update</span>\n                <div style=\"margin: auto 0em 0em 0em ;\">\n                    <i class=\"wi wi-celsius\" style=\"font-size: 100px;\"></i>\n                </div>\n            </div>\n            <span>\n                <i class=\"wi wi-thermometer\" style=\"font-size: x-large;\"></i>\n                <span id=\"temparature\" style=\"font-size: large; font-weight: bold; padding: 2em 5em 0em 1em;\"> :\n                    Update</span>\n            </span>\n            <span>\n                <i class=\"wi wi-raindrops\" style=\"font-size: xx-large;\"></i>\n                <span id=\"relative_humid\" style=\"font-size: large; font-weight: bold; padding: 2em 0em 0em 1em;\"> :\n                    Update</span>\n            </span>\n\n            <div style=\"padding-top: 2em;\">\n                <button class=\"btn btn-info\" id=\"refresh_button\" onclick=\"dht()\"></button>\n            </div>\n        </div>\n        <div id=\"general_setting\" style=\"padding:32px;\">\n            <hr>\n            <h2 id=\"heading_option3\"></h2>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" onclick=\"toggleMotionSensor()\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"motion_sensor\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" onclick=\"toggleAlarmStatus()\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"alarm_status\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <p>\n                <label class=\"switch\">\n                    <input type=\"checkbox\" onclick=\"handleLanguage()\">\n                    <span class=\"slider round\"></span>\n                </label>\n                <span id=\"change_language\" value=\"vie\" style=\"padding-left: 0.5em;\"></span>\n            </p>\n            <div>\n                <img src=\"https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/ESP-12E-Development-Board-ESP8266-NodeMCU-Pinout.png\"\n                    style=\"width: 100%; height: auto;\" alt=\"My images\">\n            </div>\n            <hr>\n        </div>\n    </div>\n\n    <footer class=\"w3-container w3-theme\" style=\"padding: 1em;bottom: 0;width: 100%;position: absolute;\">\n        <p style=\"margin-top: 5px; margin-bottom: 5px;\">Pham Thanh Danh, Spring 2021</p>\n    </footer>\n\n    </div>\n\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js\"></script>\n    <script src=\"https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js\"></script>\n    <script>\n        /* Function send to Node MCU */\n        function init() {\n            option1();\n            updateTextVIE();\n        }\n\n        function update() {\n            var url_switch1 = \"/checkstatus\";\n            $.ajax({\n                url: url_switch1,\n                dataType: \"text\",\n                error: function () {\n                    alert(\"Error! Check your connection and try again.\");\n                },\n                success: function (response) {\n                    if (response == '1') {\n                        document.getElementById(\"switch1\").setAttribute(\"checked\", \"\");\n                    }\n                }\n            })\n        }\n\n        function toggleMotionSensor() {\n            url = \"/motionsensor?toggle=true\";\n            $.ajax({\n                url: this.url,\n                dataType: \"text\",\n                error: function () {\n                    alert(\"Error! Check your connection and try again.\");\n                },\n                success: function (response) {\n                    alert(\"Toggle Motion Sensor sucessfully, State \" + response);\n                }\n            })\n        }\n\n        function toggleAlarmStatus() {\n            url = \"/alarmstatus?toggle=true\";\n            $.ajax({\n                url: this.url,\n                dataType: \"text\",\n                error: function () {\n                    alert(\"Error! Check your connection and try again.\");\n                },\n                success: function (response) {\n                    alert(\"Toggle Alarm status sucessfully, State \" + response);\n                }\n            })\n        }\n        update();\n        init();\n    </script>\n\n</body>\n\n</html>"};
 
 const char *ssid = STASSID;
 const char *password = STAPSK;
 
 ESP8266WebServer server(80);
 
-ICACHE_RAM_ATTR void detectsMovement(){
-  if (!startTimer){
+// start of timerCallback
+void timerCallback(void* pArg){
+  tickOccured = true;
+} // End of timerCallback
+
+
+ICACHE_RAM_ATTR void detectsMovement()
+{
+  if (!startTimer)
+  {
     countMotion++;
     Serial.print("MOTION DETECTED!!!  count = " + String(countMotion));
     startTimer = true;
     lastTrigger = millis();
     /* Light control */
-    if (statusLight){
+    if (statusLight)
+    {
       if (digitalRead(relay3) == LOW)
         digitalWrite(relay3, LOW);
     }
     /* Alarm control */
-    if(statusAlarm){
+    if (statusAlarm)
+    {
       if (digitalRead(relay4) == LOW)
         digitalWrite(relay4, LOW);
     }
-  }   
+  }
+}
+
+void user_init(void) {
+  os_timer_setfn(&myTimer, timerCallback, NULL);
+  os_timer_arm(&myTimer, 10000, true);
+  pinMode(led, OUTPUT);
+  pinMode(relay1, OUTPUT);
+  pinMode(relay2, OUTPUT);
+  pinMode(relay3, OUTPUT);
+  pinMode(relay4, OUTPUT);
+  pinMode(motion_pin, INPUT);
+
+  digitalWrite(led, HIGH);
+  digitalWrite(relay1, HIGH);
+  digitalWrite(relay2, HIGH);
+  digitalWrite(relay3, HIGH);
+  digitalWrite(relay4, HIGH);
+  dht.begin();
+
+  Serial.begin(115200);
+  attachInterrupt(digitalPinToInterrupt(motion_pin), detectsMovement, RISING);
 }
 
 void handleRoot(){
@@ -188,24 +231,31 @@ void updateMotionSensor(){
   }
 }
 
+void handleDistance(){
+  digitalWrite(trig_pin, LOW);
+  delayMicroseconds(2);
+  // Sets the trigPin HIGH (ACTIVE) for 10 microseconds
+  digitalWrite(trig_pin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig_pin, LOW);
+  // Reads the echoPin, returns the sound wave travel time in microseconds
+  duration = pulseIn(echo_pin, HIGH);
+  // Calculating the distance
+  distance += duration * 0.034 / 2; // Speed of sound wave divided by 2 (go and back)
+  // Displays the distance on the Serial Monitor
+  if (++count_distance > 100)
+  {
+    Serial.print("Distance: ");
+    Serial.print(distance / 100);
+    Serial.println(" cm");
+    count_distance = 0;
+    distance = 0;
+  }
+}
+
 void setup(void)
 {
-  pinMode(led, OUTPUT);
-  pinMode(relay1, OUTPUT);
-  pinMode(relay2, OUTPUT);
-  pinMode(relay3, OUTPUT);
-  pinMode(relay4, OUTPUT);
-  pinMode(motion_pin, INPUT);
-
-  digitalWrite(led, HIGH);
-  digitalWrite(relay1, HIGH);
-  digitalWrite(relay2, HIGH);
-  digitalWrite(relay3, HIGH);
-  digitalWrite(relay4, HIGH);
-  dht.begin();
-
-  Serial.begin(115200);
-  attachInterrupt(digitalPinToInterrupt(motion_pin), detectsMovement, RISING);
+  user_init();
   WiFi.mode(WIFI_STA);
   //WiFi.begin(ssid, password);
   Serial.println("");
@@ -291,8 +341,10 @@ void loop(void){
   ArduinoOTA.handle();
   if (motionStatus) 
     updateMotionSensor();
-  // if (now % 1000 == 0)
-  // {
-  //   Serial.println(digitalRead(motion_pin));
-  // }
+
+  //handleDistance();
+  if (tickOccured == true){
+    Serial.println("Tick Occurred");
+    tickOccured = false;
+  }
 }
