@@ -96,6 +96,7 @@ function updateTextENG() {
     document.getElementById("option1").innerText = "General Control";
     document.getElementById("option2").innerText = "Humidity & Temparature";
     document.getElementById("option3").innerText = "Setting";
+    document.getElementById("option4").innerText = "Security Camera";
     document.getElementById("relay1").innerText = "Relay 1";
     document.getElementById("relay2").innerText = "Relay 2";
     document.getElementById("relay3").innerText = "Front light";
@@ -114,6 +115,7 @@ function updateTextVIE() {
     document.getElementById("option1").innerText = "Dieu khien chung";
     document.getElementById("option2").innerText = "Nhiet do & Do am";
     document.getElementById("option3").innerText = "Cai dat";
+    document.getElementById("option4").innerText = "Camera An ninh";
     document.getElementById("relay1").innerText = "Relay 1";
     document.getElementById("relay2").innerText = "Relay 2";
     document.getElementById("relay3").innerText = "Den cong truoc";
