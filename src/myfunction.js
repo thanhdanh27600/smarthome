@@ -101,7 +101,6 @@ function updateTextENG() {
     document.getElementById("relay2").innerText = "Relay 2";
     document.getElementById("relay3").innerText = "Front light";
     document.getElementById("relay4").innerText = "Alarm";
-    document.getElementById("camera").innerText = "Security Camera";
     document.getElementById("refresh_button").innerText = "Update";
     document.getElementById("change_language").innerText = "Change language";
     document.getElementById("motion_sensor").innerText = "Motion Sensor";
@@ -120,7 +119,6 @@ function updateTextVIE() {
     document.getElementById("relay2").innerText = "Relay 2";
     document.getElementById("relay3").innerText = "Den cong truoc";
     document.getElementById("relay4").innerText = "Chuong";
-    document.getElementById("camera").innerText = "Security Camera";
     document.getElementById("refresh_button").innerText = "Cap nhat";
     document.getElementById("change_language").innerText = "Thay doi ngon ngu";
     document.getElementById("motion_sensor").innerText = "Kich hoat chuyen dong";
