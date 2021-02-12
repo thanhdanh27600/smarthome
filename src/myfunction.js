@@ -164,6 +164,7 @@ function option3() {
 }
 
 function option4() {
+    reset();
     document.getElementById("option4").classList.add('w3-teal');
     document.getElementById("general_control").classList.add('d-none');
     document.getElementById("dht_22").classList.add('d-none');
