@@ -1,0 +1,16 @@
+Removed Pin From Net: NetName=VOUT+ Pin=RELAY-GND
+Removed Pin From Net: NetName=IN1 Pin=RELAY-IN1
+Removed Pin From Net: NetName=IN2 Pin=RELAY-IN2
+Removed Pin From Net: NetName=IN3 Pin=RELAY-IN3
+Removed Pin From Net: NetName=IN4 Pin=RELAY-IN4
+Added Component: Designator=relay4(PCBComponent_1)
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=VOUT+ Pin=relay4-GND
+Added Pin To Net: NetName=IN1 Pin=relay4-IN1
+Added Pin To Net: NetName=IN2 Pin=relay4-IN2
+Added Pin To Net: NetName=IN3 Pin=relay4-IN3
+Added Pin To Net: NetName=IN4 Pin=relay4-IN4
+Added Pin To Net: NetName=VOUT- Pin=relay4-VCC

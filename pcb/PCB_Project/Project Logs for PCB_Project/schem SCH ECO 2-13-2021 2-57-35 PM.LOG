@@ -1,0 +1,7 @@
+Remove Pin=NodeMCU-1-GND From Net=VOUT-
+Remove Pin=relay4- From Net=IN1
+Remove Pin=relay4- From Net=IN2
+Remove Pin=relay4- From Net=IN3
+Remove Pin=relay4- From Net=IN4
+Remove Pin=relay4- From Net=VOUT+
+Remove Pin=relay4- From Net=VOUT-

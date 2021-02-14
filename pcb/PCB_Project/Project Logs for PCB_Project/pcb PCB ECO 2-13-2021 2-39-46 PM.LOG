@@ -1,0 +1,60 @@
+Added Component: Designator=HD1(HED2)
+Added Component: Designator=LM2956(LM2596-TH)
+Added Component: Designator=NodeMCU-1(NodeMCU V1.0 ESP-12E)
+Added Component: Designator=P2(CON Header 4)
+Added Component: Designator=P3(CON Header 4)
+Added Component: Designator=P4(HDR DOMINO 3 - 4mm male and female angle)
+Added Component: Designator=P6(HDR DOMINO 3 - 4mm male and female angle)
+Added Component: Designator=relay4(PCBComponent_1)
+Added Pin To Net: NetName=3V3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3 Pin=NodeMCU-1-3V3
+Added Pin To Net: NetName=3V3 Pin=P2-1
+Added Pin To Net: NetName=3V3 Pin=P4-1
+Added Net: Name=3V3
+Added Pin To Net: NetName=DHT-5 Pin=NodeMCU-1-D1
+Added Pin To Net: NetName=DHT-5 Pin=P4-2
+Added Net: Name=DHT-5
+Added Pin To Net: NetName=ECHO15 Pin=NodeMCU-1-D8
+Added Pin To Net: NetName=ECHO15 Pin=P3-3
+Added Net: Name=ECHO15
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=P2-2
+Added Pin To Net: NetName=GND Pin=P4-3
+Added Net: Name=GND
+Added Pin To Net: NetName=IN1 Pin=NodeMCU-1-D0
+Added Net: Name=IN1
+Added Pin To Net: NetName=IN2 Pin=NodeMCU-1-D5
+Added Net: Name=IN2
+Added Pin To Net: NetName=IN3 Pin=NodeMCU-1-D6
+Added Net: Name=IN3
+Added Pin To Net: NetName=IN4 Pin=NodeMCU-1-D7
+Added Net: Name=IN4
+Added Pin To Net: NetName=LIGHT Pin=NodeMCU-1-A0
+Added Pin To Net: NetName=LIGHT Pin=P2-4
+Added Net: Name=LIGHT
+Added Pin To Net: NetName=MOTION-4 Pin=NodeMCU-1-D2
+Added Pin To Net: NetName=MOTION-4 Pin=P6-2
+Added Net: Name=MOTION-4
+Added Pin To Net: NetName=TRIG0 Pin=NodeMCU-1-D3
+Added Pin To Net: NetName=TRIG0 Pin=P3-2
+Added Net: Name=TRIG0
+Added Pin To Net: NetName=VIN+ Pin=HD1-2
+Added Net: Name=VIN+
+Added Pin To Net: NetName=VIN- Pin=HD1-1
+Added Net: Name=VIN-
+Added Pin To Net: NetName=VOUT+ Pin=NodeMCU-1-VIN
+Added Pin To Net: NetName=VOUT+ Pin=P3-1
+Added Pin To Net: NetName=VOUT+ Pin=P6-1
+Added Net: Name=VOUT+
+Added Pin To Net: NetName=VOUT- Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=VOUT- Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=VOUT- Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=VOUT- Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=VOUT- Pin=P3-4
+Added Pin To Net: NetName=VOUT- Pin=P6-3
+Added Net: Name=VOUT-
+Added Class: Name=schem

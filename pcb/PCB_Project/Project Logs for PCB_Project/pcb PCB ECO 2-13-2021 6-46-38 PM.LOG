@@ -1,0 +1,7 @@
+Change Component Footprint: Designator=P4 Old Footprint=HDR DOMINO 3 - 4mm male and female angle New Footprint=HDR DOMINO 3
+Change Component Footprint: Designator=P6 Old Footprint=HDR DOMINO 3 - 4mm male and female angle New Footprint=HDR DOMINO 3
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND

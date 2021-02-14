@@ -1,0 +1,23 @@
+Removed Pin From Net: NetName=VOUT+ Pin=P4-1
+Removed Pin From Net: NetName=DHT-5 Pin=P4-2
+Removed Pin From Net: NetName=VOUT- Pin=P4-3
+Removed Pin From Net: NetName=VOUT+ Pin=P6-1
+Removed Pin From Net: NetName=MOTION-4 Pin=P6-2
+Removed Pin From Net: NetName=VOUT- Pin=P6-3
+Removed Member From Class: ClassName=schem Member=P4
+Removed Member From Class: ClassName=schem Member=P6
+Added Component: Designator=DHT22(CON.HDR1X3)
+Added Component: Designator=Motion Sensor(CON.HDR1X3)
+Added Pin To Net: NetName=VOUT+ Pin=DHT22-1
+Added Pin To Net: NetName=DHT-5 Pin=DHT22-2
+Added Pin To Net: NetName=VOUT- Pin=DHT22-3
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT+ Pin=Motion Sensor-1
+Added Pin To Net: NetName=MOTION-4 Pin=Motion Sensor-2
+Added Pin To Net: NetName=VOUT- Pin=Motion Sensor-3
+Added Member To Class: ClassName=schem Member=Component DHT22 IO
+Added Member To Class: ClassName=schem Member=Component Motion Sensor IO

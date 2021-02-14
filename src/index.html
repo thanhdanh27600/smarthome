@@ -12,9 +12,9 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.10/css/weather-icons.min.css">
 
 <style>
-    body{
-    position: relative;
-    height: 100vh;
+    body {
+        position: relative;
+        height: 100vh;
     }
 
     .d-none {
@@ -34,7 +34,8 @@
     <nav class="w3-sidebar w3-bar-block w3-collapse w3-animate-left w3-card" style="z-index:3;width:250px;"
         id="mySidebar">
         <a class="w3-bar-item w3-button w3-border-bottom w3-large" href="#"><img
-                src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/esp8266-nodemcu-wifi-module-500x500.jpg" style="width:80%;"></a>
+                src="https://raw.githubusercontent.com/thanhdanh27600/smarthome/main/esp8266-nodemcu-wifi-module-500x500.jpg"
+                style="width:80%;"></a>
         <a class="w3-bar-item w3-button w3-hide-large w3-large" href="javascript:void(0)" onclick="w3_close()">Close <i
                 class="fa fa-remove"></i></a>
         <a id="option1" class="w3-bar-item w3-button w3-teal" href="javascript:void(0)" onclick="option1()"></a>
@@ -55,7 +56,9 @@
         </div>
 
         <header class="w3-container w3-theme" style="padding:50px 0px 0px 1em">
-            <h1 class="w3-xxlarge">Smarthome <span style="float: right; margin-right: 0.5em; font-size: x-large; padding-top: 10px;" id="clock"></span></h1>
+            <h1 class="w3-xxlarge">Smarthome <span
+                    style="float: right; margin-right: 0.5em; font-size: x-large; padding-top: 10px;" id="clock"></span>
+            </h1>
         </header>
         <div style="float: right;margin-right: 1em;font-style: italic;" id="last_update">Last update: </div>
         <div id="general_control" class="w3-container" style="padding:0px 32px;">
@@ -114,6 +117,9 @@
             <div style="padding-top: 2em;">
                 <button class="btn btn-info" id="refresh_button" onclick="dht()"></button>
             </div>
+            <div style="padding-top: 2em;">
+                <button class="btn btn-info" id="light_button" onclick="light()">light</button>
+            </div>
         </div>
         <div id="general_setting" style="padding:32px;">
             <hr>
@@ -149,12 +155,11 @@
         <div id="security_camera" style="padding:32px;">
             <hr>
             <h2 id="heading_option4">Camera</h2>
-            <button class="btn btn-info" id="refresh_camera" onclick="refreshCamera()">Refresh</button>
-                <img id="image_camera" src=""
-                    style="width: 100%; height: auto;" alt="My images"> </img>
-                <div>
-                    <iframe id="iframe_camera" src="http://thanhdanh2000.cameraddns.net/Streaming/channels/1/picture" style= "width: 100%;height: 100vh;" title="description"></iframe>
-                </div>
+            <button class="btn btn-info" id="config_camera" onclick="refreshCamera()">Config</button>
+            <div>
+                <iframe id="iframe_camera" src="http://thanhdanh2000.cameraddns.net/doc/page/config.asp"
+                    style="width: 100%;height: 100vh;" title="description"></iframe>
+            </div>
         </div>
     </div>
 
@@ -167,15 +172,42 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://combinatronics.com/thanhdanh27600/smarthome/main/src/myfunction.js"></script>
     <script>
-
         /* Function send to Node MCU */
-        function refreshCamera(){
-            setTimeout(()=>{document.getElementById('iframe_camera').style.display="none",1000});
-            setInterval(() =>{document.getElementById('image_camera').src="http://thanhdanh2000.cameraddns.net/Streaming/channels/1/picture?" +  new Date().getTime();},1000);
+
+        function light() {
+            // for check dht
+            url_dht = "/light";
+            $.ajax({
+                url: url_dht,
+                dataType: "text",
+                error: function () {
+                    alert("Error! Check your connection and try again.");
+                },
+                success: function (response) {
+                    if (response == "failed") {
+                        alert("Cannot read Light");
+                        return;
+                    } else {
+                        alert(response);
+                    }
+                }
+            })
         }
+
+        function configCamera() {
+            document.getElementById('iframe_camera').src = 'http://thanhdanh2000.cameraddns.net/doc/page/config.asp';
+        }
+
+        function refreshCamera() {
+            //setTimeout(()=>{document.getElementById('iframe_camera').style.display="none",1000});
+            //setInterval(() =>{document.getElementById('image_camera').src="http://thanhdanh2000.cameraddns.net/Streaming/channels/1/picture?" +  new Date().getTime();},3000)
+            document.getElementById('iframe_camera').src =
+                'http://thanhdanh2000.cameraddns.net/ISAPI/Streaming/channels/102/httpPreview';
+        }
+
         function refreshTime() {
             var now = new Date();
-            url = "/refreshtime?hour="+now.getHours()+"&minute="+now.getMinutes();
+            url = "/refreshtime?hour=" + now.getHours() + "&minute=" + now.getMinutes();
             $.ajax({
                 url: this.url,
                 dataType: "text",
@@ -187,7 +219,7 @@
                 }
             })
         }
-        
+
         function init() {
             option1();
             updateTextVIE();

@@ -1,0 +1,11 @@
+Removed Member From Class: ClassName=schem Member=relay4
+Added Component: Designator=RELAY(PCBComponent_1)
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=VOUT+ Pin=RELAY-GND
+Added Pin To Net: NetName=IN1 Pin=RELAY-IN1
+Added Pin To Net: NetName=IN2 Pin=RELAY-IN2
+Added Pin To Net: NetName=IN3 Pin=RELAY-IN3
+Added Pin To Net: NetName=IN4 Pin=RELAY-IN4

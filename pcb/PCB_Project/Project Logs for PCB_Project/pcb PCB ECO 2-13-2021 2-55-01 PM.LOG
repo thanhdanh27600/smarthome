@@ -1,0 +1,8 @@
+Added Component: Designator=HD1(HED2)
+Added Pin To Net: NetName=VOUT- Pin=HD1-1
+Added Pin To Net: NetName=VOUT+ Pin=HD1-2
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Pin To Net: NetName=GND Pin=NodeMCU-1-GND
+Added Member To Class: ClassName=schem Member=Component HD1 Header 2

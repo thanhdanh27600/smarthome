@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=VOUT- Pin=Motion Sensor-3
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=GND Pin=Motion Sensor-3

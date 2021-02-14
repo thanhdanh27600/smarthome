@@ -1,0 +1,7 @@
+Removed Pin From Net: NetName=IN2 Pin=LoLin-1-D4
+Added Pin To Net: NetName=IN2 Pin=LoLin-1-D5
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
+Added Pin To Net: NetName=VOUT- Pin=LoLin-1-GND
